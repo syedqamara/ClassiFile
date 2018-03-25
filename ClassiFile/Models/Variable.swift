@@ -37,6 +37,7 @@ let kBackSlashN = "\n"
 
 
 class Variable: NSObject {
+    var variableID: String = UUID.init().uuidString
     var nameOfClass: String = ""
     var name: String = ""
     var type: VariableType = .int

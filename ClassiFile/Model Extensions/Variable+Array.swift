@@ -25,6 +25,11 @@ extension Array where Element: Variable {
             return variable.shouldHaveSortMethod
         })
     }
+    func findVariableByID(_ id: String) -> Variable? {
+        return self.filter({ (variable) -> Bool in
+            return variable.variableID == id
+        }).first
+    }
 }
 /*
  

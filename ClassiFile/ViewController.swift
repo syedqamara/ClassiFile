@@ -8,23 +8,58 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+enum ColoumnIdentifier: String {
+    case name = "1"
+    case type = "2"
+    case filter = "3"
+    case sort = "4"
+}
+
+class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+    @IBOutlet weak var tableView: NSTableView!
     var classObj = Class()
+    var rowCount = 1
     override func viewDidLoad() {
         super.viewDidLoad()
-        classObj.name = "User"
-        classObj.addVariable("id", .int, false, true)
-        classObj.addVariable("Name", .int, false, true)
-        classObj.addVariable("Age", .int, true, true)
-        classObj.addVariable("dob", .int, true, false)
-        classObj.addVariable("present", .int, false, false)
+//        classObj.name = "User"
+//        classObj.addVariable("id", .int, false, true)
+//        classObj.addVariable("Name", .int, false, true)
+//        classObj.addVariable("Age", .int, true, true)
+//        classObj.addVariable("dob", .int, true, false)
+//        classObj.addVariable("present", .int, false, false)
         
-        saveClass()
-        
-        
-        
-//        ModelManager.shared.saveClass(classFile: classObj)
-        // Do any additional setup after loading the view.
+    }
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return rowCount
+    }
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard let identifier = tableColumn?.identifier.rawValue else {return nil}
+        guard let coloumnType = ColoumnIdentifier(rawValue: identifier) else {return nil}
+        switch coloumnType {
+        case .name:
+            return variableNames()
+        case .type:
+            return variableTypes()
+        case .filter:
+            return variableFilter()
+        case .sort:
+            return variableSort()
+        default:
+            break
+        }
+        return nil
+    }
+    func variableNames() -> NSView? {
+        return nil
+    }
+    func variableTypes() -> NSView? {
+        return nil
+    }
+    func variableFilter() -> NSView? {
+        return nil
+    }
+    func variableSort() -> NSView? {
+        return nil
     }
     
     func saveClass() {
@@ -63,6 +98,16 @@ class ViewController: NSViewController {
                                        message: error.localizedDescription)
             }
         }
+    }
+    
+    @IBAction func didTapSaveButton(_ sender: Any) {
+    }
+    @IBAction func didTapPlusButton(_ sender: Any) {
+        let indexSet: IndexSet = [rowCount]
+        rowCount += 1
+        tableView.beginUpdates()
+        tableView.insertRows(at: indexSet, withAnimation: .slideLeft)
+        tableView.endUpdates()
     }
     func showErrorDialogIn(title: String, message: String) {
         let alert = NSAlert()
