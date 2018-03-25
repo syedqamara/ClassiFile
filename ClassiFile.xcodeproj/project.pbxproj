@@ -13,6 +13,16 @@
 		526C474C20681A820056B6EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 526C474A20681A820056B6EE /* Main.storyboard */; };
 		526C475820681A820056B6EE /* ClassiFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C475720681A820056B6EE /* ClassiFileTests.swift */; };
 		526C476320681A820056B6EE /* ClassiFileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C476220681A820056B6EE /* ClassiFileUITests.swift */; };
+		526C477D20681B8C0056B6EE /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C477120681B8C0056B6EE /* ModelManager.swift */; };
+		526C477E20681B8C0056B6EE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C477320681B8C0056B6EE /* String.swift */; };
+		526C477F20681B8C0056B6EE /* Variable+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C477420681B8C0056B6EE /* Variable+Array.swift */; };
+		526C478020681B8C0056B6EE /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C477620681B8C0056B6EE /* Parameter.swift */; };
+		526C478120681B8C0056B6EE /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C477720681B8C0056B6EE /* Enumerations.swift */; };
+		526C478220681B8C0056B6EE /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C477820681B8C0056B6EE /* Extension.swift */; };
+		526C478320681B8C0056B6EE /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C477920681B8C0056B6EE /* File.swift */; };
+		526C478420681B8C0056B6EE /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C477A20681B8C0056B6EE /* Class.swift */; };
+		526C478520681B8C0056B6EE /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C477B20681B8C0056B6EE /* Variable.swift */; };
+		526C478620681B8C0056B6EE /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C477C20681B8C0056B6EE /* Function.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +56,16 @@
 		526C475E20681A820056B6EE /* ClassiFileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClassiFileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		526C476220681A820056B6EE /* ClassiFileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassiFileUITests.swift; sourceTree = "<group>"; };
 		526C476420681A820056B6EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		526C477120681B8C0056B6EE /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		526C477320681B8C0056B6EE /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		526C477420681B8C0056B6EE /* Variable+Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Variable+Array.swift"; sourceTree = "<group>"; };
+		526C477620681B8C0056B6EE /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
+		526C477720681B8C0056B6EE /* Enumerations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
+		526C477820681B8C0056B6EE /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		526C477920681B8C0056B6EE /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		526C477A20681B8C0056B6EE /* Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
+		526C477B20681B8C0056B6EE /* Variable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
+		526C477C20681B8C0056B6EE /* Function.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +118,9 @@
 			children = (
 				526C474420681A820056B6EE /* AppDelegate.swift */,
 				526C474620681A820056B6EE /* ViewController.swift */,
+				526C477020681B8C0056B6EE /* Helper */,
+				526C477220681B8C0056B6EE /* Model Extensions */,
+				526C477520681B8C0056B6EE /* Models */,
 				526C474820681A820056B6EE /* Assets.xcassets */,
 				526C474A20681A820056B6EE /* Main.storyboard */,
 				526C474D20681A820056B6EE /* Info.plist */,
@@ -122,6 +145,37 @@
 				526C476420681A820056B6EE /* Info.plist */,
 			);
 			path = ClassiFileUITests;
+			sourceTree = "<group>";
+		};
+		526C477020681B8C0056B6EE /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				526C477120681B8C0056B6EE /* ModelManager.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		526C477220681B8C0056B6EE /* Model Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				526C477320681B8C0056B6EE /* String.swift */,
+				526C477420681B8C0056B6EE /* Variable+Array.swift */,
+			);
+			path = "Model Extensions";
+			sourceTree = "<group>";
+		};
+		526C477520681B8C0056B6EE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				526C477620681B8C0056B6EE /* Parameter.swift */,
+				526C477720681B8C0056B6EE /* Enumerations.swift */,
+				526C477820681B8C0056B6EE /* Extension.swift */,
+				526C477920681B8C0056B6EE /* File.swift */,
+				526C477A20681B8C0056B6EE /* Class.swift */,
+				526C477B20681B8C0056B6EE /* Variable.swift */,
+				526C477C20681B8C0056B6EE /* Function.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +311,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				526C478120681B8C0056B6EE /* Enumerations.swift in Sources */,
 				526C474720681A820056B6EE /* ViewController.swift in Sources */,
 				526C474520681A820056B6EE /* AppDelegate.swift in Sources */,
+				526C478620681B8C0056B6EE /* Function.swift in Sources */,
+				526C477E20681B8C0056B6EE /* String.swift in Sources */,
+				526C478520681B8C0056B6EE /* Variable.swift in Sources */,
+				526C478020681B8C0056B6EE /* Parameter.swift in Sources */,
+				526C477F20681B8C0056B6EE /* Variable+Array.swift in Sources */,
+				526C477D20681B8C0056B6EE /* ModelManager.swift in Sources */,
+				526C478320681B8C0056B6EE /* File.swift in Sources */,
+				526C478420681B8C0056B6EE /* Class.swift in Sources */,
+				526C478220681B8C0056B6EE /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
