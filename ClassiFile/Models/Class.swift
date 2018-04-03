@@ -88,12 +88,12 @@ class Class: File {
         return (variables.haveAnySortMethodRequest || variables.haveAnyFilterFindMethodRequest)
     }
     
-    func addVariable(_ name: String, _ type: VariableType, _ shouldSort: Bool, _ shouldFilter: Bool) {
+    func addVariable(name: String, variableType: VariableType, shouldHaveSort: Bool, shouldHaveFilter: Bool) {
         let variable = Variable()
         variable.name = name
-        variable.type = type
-        variable.shouldHaveSortMethod = shouldSort
-        variable.shouldHaveFindFilterMethod = shouldFilter
+        variable.type = variableType
+        variable.shouldHaveSortMethod = shouldHaveSort
+        variable.shouldHaveFindFilterMethod = shouldHaveFilter
         variables.append(variable)
     }
     
