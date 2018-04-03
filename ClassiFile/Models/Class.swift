@@ -23,7 +23,14 @@ class Class: File {
     ///Contains complete code for your class as string
     override var completeClass: String? {
         //create class
-        var code = "class \(name): NSObject {" + kBackSlashN
+        var code = """
+        //This is Automatic Created Model \(name)
+        
+        import Foundation
+        
+        
+        """
+        code = code + "class \(name): NSObject {" + kBackSlashN
         
         //Declare all variables for this class
         code = code + variableInitialization + kBackSlashN
@@ -44,7 +51,7 @@ class Class: File {
     var variableInitialization: String {
         var code = ""
         for variable in variables {
-            code = code + variable.declareVariable + kBackSlashN
+            code = code + variable.declareVariable
         }
         code = code + kBackSlashN
         code.addMark(MarkType.properties)
@@ -56,9 +63,9 @@ class Class: File {
         var code = "///Initialize \(name) with json" + kBackSlashN
         code = code + "public init(_ json: [String: AnyObject]){\(kBackSlashN)"
         for variable in variables {
-            code = code + variable.initMethodLineOfThisVariable + kBackSlashN
+            code = code + variable.initMethodLineOfThisVariable
         }
-        code = code + kBackSlashN
+        code = code + "}" + kBackSlashN
         code.addMark(MarkType.initializer)
         return code
     }
@@ -68,9 +75,9 @@ class Class: File {
         code = code + "public var jsonMap: [String: AnyObject]{" + kBackSlashN
         code = code + Constant.jsonCreation + kBackSlashN
         for variable in variables {
-            code = code + variable.mapMethodLineOfThisVariable + kBackSlashN
+            code = code + variable.mapMethodLineOfThisVariable
         }
-        code = code + kBackSlashN
+        code = code + "}" + kBackSlashN
         code.addMark(MarkType.jsonMapper)
         return code
     }

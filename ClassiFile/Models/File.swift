@@ -10,27 +10,32 @@ import Cocoa
 
 class File: NSObject {
     var name: String = ""
-    var path: String = "~/Documents/"
+    var path: String{
+//        return getFileFirstTowName + "Documents/"
+        return "~/Documents/"
+    }
     var completeClass: String? {
         return nil
     }
     var fullFileName: String {
-        return name + ".swift"
+        return "" + name + ".swift"
     }
     var localURL: URL?
     func save() {
-        do {
-            // get the documents folder url
-            if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                let fileURL = documentDirectory.appendingPathExtension(fullFileName)
-                FileManager.default.createFile(atPath: fileURL.lastPathComponent, contents: nil, attributes: nil)
-                if let fileData = completeClass {
-                    try fileData.write(to: fileURL, atomically: false, encoding: .utf8)
-                    localURL = fileURL
+        let fileURLString = path + fullFileName
+        let fileURL = URL(string: fileURLString)!
+        localURL = fileURL
+    }
+    var getFileFirstTowName: String {
+        if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            var arrayOfNames = documentDirectory.absoluteString.replacingOccurrences(of: "file:///", with: "").components(separatedBy: "/")
+            if let firstName = arrayOfNames.first {
+                arrayOfNames.removeFirst()
+                if let secondName = arrayOfNames.first {
+                    return "file:///" + firstName + "/" + secondName + "/"
                 }
             }
-        } catch {
-            print("error:", error)
         }
+        return ""
     }
 }

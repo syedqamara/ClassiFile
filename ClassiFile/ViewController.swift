@@ -17,49 +17,69 @@ enum ColoumnIdentifier: String {
 
 class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var nameTextField: NSTextField!
+    @IBOutlet weak var typeOption: NSPopUpButton!
+    @IBOutlet weak var sortCheckBox: NSButton!
+    @IBOutlet weak var filterCheckBox: NSButton!
+    @IBOutlet weak var classNameTF: NSTextField!
+    
+    
     var classObj = Class()
-    var rowCount = 1
+    var resetVariableFields: Void {
+        nameTextField.stringValue = ""
+        sortCheckBox.state = NSControl.StateValue.off
+        filterCheckBox.state = NSControl.StateValue.off
+        typeOption.select(typeOption.itemArray.first)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        classObj.name = "User"
-//        classObj.addVariable("id", .int, false, true)
-//        classObj.addVariable("Name", .int, false, true)
-//        classObj.addVariable("Age", .int, true, true)
-//        classObj.addVariable("dob", .int, true, false)
-//        classObj.addVariable("present", .int, false, false)
-        
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.resetVariableFields
     }
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return rowCount
+        return classObj.variables.count
     }
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let identifier = tableColumn?.identifier.rawValue else {return nil}
         guard let coloumnType = ColoumnIdentifier(rawValue: identifier) else {return nil}
+        let variable = self.classObj.variables[row]
         switch coloumnType {
         case .name:
-            return variableNames()
+            if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(identifier), owner: nil) as? NSTableCellView {
+                cell.textField?.stringValue = variable.name
+                return cell
+            }
         case .type:
-            return variableTypes()
+            if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(identifier), owner: nil) as? NSTableCellView {
+                cell.textField?.stringValue = variable.type.rawValue
+                return cell
+            }
         case .filter:
-            return variableFilter()
+            if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(identifier), owner: nil) as? NSTableCellView {
+                cell.textField?.stringValue = "Filter/Find Method"
+                cell.imageView?.image = #imageLiteral(resourceName: "disable")
+                if variable.shouldHaveFindFilterMethod {
+                    cell.imageView?.image = #imageLiteral(resourceName: "enable")
+                }
+                return cell
+            }
         case .sort:
-            return variableSort()
+            if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier.init(identifier), owner: nil) as? NSTableCellView {
+                cell.textField?.stringValue = "Sort Method"
+                cell.imageView?.image = #imageLiteral(resourceName: "disable")
+                if variable.shouldHaveSortMethod {
+                    cell.imageView?.image = #imageLiteral(resourceName: "enable")
+                }
+                return cell
+            }
         default:
             break
         }
         return nil
     }
-    func variableNames() -> NSView? {
-        return nil
-    }
-    func variableTypes() -> NSView? {
-        return nil
-    }
-    func variableFilter() -> NSView? {
-        return nil
-    }
-    func variableSort() -> NSView? {
-        return nil
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        return false
     }
     
     func saveClass() {
@@ -81,7 +101,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         // 2
         let panel = NSSavePanel()
         // 3
-        panel.directoryURL = FileManager.default.homeDirectoryForCurrentUser
+        panel.directoryURL = URL(string: "~/Documents/")!
         // 4
         
         panel.nameFieldStringValue = fileURL.lastPathComponent
@@ -93,6 +113,12 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             // 6
             do {
                 try infoAsText.write(to: url, atomically: true, encoding: .utf8)
+                if file is Class {
+                    let fileExtension = Extension(with: self.classObj)
+                    fileExtension.save()
+                    self.save(fileExtension, completion)
+                }
+                
             } catch {
                 self.showErrorDialogIn(title: "Unable to save file",
                                        message: error.localizedDescription)
@@ -101,13 +127,21 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {
+        let classNameObj = classNameTF.stringValue.replacingOccurrences(of: ".swfit", with: "")
+        classObj.name = classNameObj
+        saveClass()
     }
     @IBAction func didTapPlusButton(_ sender: Any) {
-        let indexSet: IndexSet = [rowCount]
-        rowCount += 1
-        tableView.beginUpdates()
-        tableView.insertRows(at: indexSet, withAnimation: .slideLeft)
-        tableView.endUpdates()
+        let newVar = Variable()
+        newVar.name = nameTextField.stringValue
+        if let titleOfOption = typeOption.selectedItem?.title, let varType = VariableType(rawValue: titleOfOption) {
+            newVar.type = varType
+        }
+        newVar.shouldHaveSortMethod = sortCheckBox.state.rawValue == 1
+        newVar.shouldHaveFindFilterMethod = filterCheckBox.state.rawValue == 1
+        classObj.variables.append(newVar)
+        self.resetVariableFields
+        self.tableView.reloadData()
     }
     func showErrorDialogIn(title: String, message: String) {
         let alert = NSAlert()

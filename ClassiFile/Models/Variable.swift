@@ -9,7 +9,7 @@
 import Cocoa
 
 class Constant {
-    static let jsonCreation = "var json = [String: AnyObject]()"
+    static let jsonCreation = "    var json = [String: AnyObject]()"
     static func getVariableType(key: String) -> VariableType {
         var type = VariableType.int
         switch key {
@@ -47,49 +47,46 @@ class Variable: NSObject {
     
     
     var declareVariable: String {
-        return "\(variableSecurity.rawValue) var \(name): \(type.rawValue)?\(kBackSlashN)"
+        return "    \(variableSecurity.rawValue) var \(name): \(type.rawValue)?\(kBackSlashN)"
     }
-//    var filterFindMethod: String {
-//        return "\(filterMethod)\(kBackSlashN)\(findMethod)"
-//    }
 
     
     var initMethodLineOfThisVariable: String {
         let sortMethodString = """
-            if let jsonVariable = json[\(name)] as? \(type.rawValue){\(kBackSlashN)
-        \(name) = jsonVariable
-        \(kBackSlashN)}\(kBackSlashN)
+            if let jsonVariable = json[\(name)] as? \(type.rawValue){
+                \(name) = jsonVariable
+           }\(kBackSlashN)
         """
         return type == .date ? "" : sortMethodString
     }
     var mapMethodLineOfThisVariable: String {
         let sortMethodString = """
-            json[\(name)] = \(name) as AnyObject\(kBackSlashN)
+                json[\(name)] = \(name) as AnyObject\(kBackSlashN)
         """
         return sortMethodString
     }
     var sortMethod: String {
-        let comment = "///This Method is used for sort Array of\(nameOfClass) by \(name)\(kBackSlashN)"
+        let comment = "    ///This Method is used for sort Array of\(nameOfClass) by \(name)\(kBackSlashN)"
         var code = """
-        func sort\(nameOfClass)sBy\(name.uppercased())(_ order: ComparisonResult) -> [\(nameOfClass)] {\(kBackSlashN)
-        let sortedArray = self.sorted { (object1, object2) -> Bool in\(kBackSlashN)
-        return object1.\(name).compare(object2.\(name)) == order\(kBackSlashN)
-        }\(kBackSlashN)
-        return sortedArray\(kBackSlashN)
-        }\(kBackSlashN)
+            func sort\(nameOfClass)sBy\(name.uppercased())(_ order: ComparisonResult) -> [\(nameOfClass)] {\(kBackSlashN)
+                let sortedArray = self.sorted { (object1, object2) -> Bool in\(kBackSlashN)
+                return object1.\(name).compare(object2.\(name)) == order\(kBackSlashN)
+                }\(kBackSlashN)
+                return sortedArray\(kBackSlashN)
+            }\(kBackSlashN)
         """
         code = comment + code + kBackSlashN
         return code
     }
     
     var filterMethod: String {
-        let comment = "///This Method is used for filter Array of\(nameOfClass) by \(name)\(kBackSlashN)"
+        let comment = "    ///This Method is used for filter Array of\(nameOfClass) by \(name)\(kBackSlashN)"
         var code = """
-        func filter\(nameOfClass)sBy\(name.uppercased())(_ \(name.uppercased()): \(type.rawValue) -> [\(nameOfClass)] {\(kBackSlashN)
-        return self.filter({ (object) -> Bool in\(kBackSlashN)
-        return object.\(name) = \(name.uppercased())\(kBackSlashN)
-        })\(kBackSlashN)
-        }\(kBackSlashN)
+            func filter\(nameOfClass)sBy\(name.uppercased())(_ \(name.uppercased()): \(type.rawValue) -> [\(nameOfClass)] {
+                return self.filter({ (object) -> Bool in
+                            return object.\(name) = \(name.uppercased())
+                        })
+            }\(kBackSlashN)
         """
         code = comment + code + kBackSlashN
         return code
@@ -97,11 +94,11 @@ class Variable: NSObject {
     var findMethod: String {
         let comment = "///This Method is used find object in Array of\(nameOfClass) by \(name)\(kBackSlashN)"
         var code = """
-        func find\(nameOfClass)sBy\(name.uppercased())(_ \(name.uppercased()): \(type.rawValue) -> \(nameOfClass)? {\(kBackSlashN)
-        return self.filter({ (object) -> Bool in\(kBackSlashN)
-        return object.\(name) = \(name.uppercased())\(kBackSlashN)
-        }).first\(kBackSlashN)
-        }\(kBackSlashN)
+            func find\(nameOfClass)sBy\(name.uppercased())(_ \(name.uppercased()): \(type.rawValue) -> \(nameOfClass)? {
+                return self.filter({ (object) -> Bool in
+                            return object.\(name) = \(name.uppercased())
+                        }).first
+            }
         """
         code = comment + code + kBackSlashN
         return code
