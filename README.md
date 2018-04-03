@@ -1,4 +1,4 @@
-# ![ClassiFile](./classifile.png)
+# ClassiFile  ![Logo](./classifile.png)
 An Open Source Mac app to created Automated Swift Classes + Extensions for your model
 
 ## In-App Models
