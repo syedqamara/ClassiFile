@@ -1,0 +1,6 @@
+framework module Pods_ClassiFileUITests {
+  umbrella header "Pods-ClassiFileUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

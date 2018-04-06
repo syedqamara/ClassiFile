@@ -701,6 +701,64 @@
             </objects>
             <point key="canvasLocation" x="162.5" y="337.5"/>
         </scene>
+        <!--Window Controller-->
+        <scene sceneID="Sm5-H1-rLW">
+            <objects>
+                <windowController id="qMV-9V-vuc" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="s67-b5-bcG">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="163" y="199" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+                        <connections>
+                            <outlet property="delegate" destination="qMV-9V-vuc" id="FA5-Qj-Zmt"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="tfz-Fv-VmG" kind="relationship" relationship="window.shadowedContentViewController" id="gsf-QD-cHZ"/>
+                    </connections>
+                </windowController>
+                <customObject id="89R-sw-Yj5" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="744" y="249"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="eMa-NW-JAA">
+            <objects>
+                <viewController id="tfz-Fv-VmG" sceneMemberID="viewController">
+                    <view key="view" id="bEx-0i-enu">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="12t-vR-Tnk">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <subviews>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="sTo-A6-ByK">
+                                        <rect key="frame" x="0.0" y="220" width="480" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="GAM-Ud-e2a"/>
+                                        </constraints>
+                                    </customView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="sTo-A6-ByK" secondAttribute="trailing" id="64e-pY-rLG"/>
+                                    <constraint firstItem="sTo-A6-ByK" firstAttribute="leading" secondItem="12t-vR-Tnk" secondAttribute="leading" id="JMl-l0-zpM"/>
+                                    <constraint firstItem="sTo-A6-ByK" firstAttribute="top" secondItem="12t-vR-Tnk" secondAttribute="top" id="Tlg-ti-NlZ"/>
+                                </constraints>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="12t-vR-Tnk" firstAttribute="top" secondItem="bEx-0i-enu" secondAttribute="top" id="LWn-Ld-6lr"/>
+                            <constraint firstAttribute="bottom" secondItem="12t-vR-Tnk" secondAttribute="bottom" id="w0e-oq-atu"/>
+                            <constraint firstItem="12t-vR-Tnk" firstAttribute="leading" secondItem="bEx-0i-enu" secondAttribute="leading" id="wP6-pN-GMW"/>
+                            <constraint firstAttribute="trailing" secondItem="12t-vR-Tnk" secondAttribute="trailing" id="ydx-q2-WPc"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="28f-Da-Bnp" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="821" y="634"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
@@ -959,7 +1017,7 @@
                                                     <rect key="frame" x="1" y="173" width="756" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
-                                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="vVP-sM-H9V">
+                                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="vVP-sM-H9V">
                                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>

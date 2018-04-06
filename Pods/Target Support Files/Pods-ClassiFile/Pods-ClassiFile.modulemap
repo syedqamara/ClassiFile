@@ -1,0 +1,6 @@
+framework module Pods_ClassiFile {
+  umbrella header "Pods-ClassiFile-umbrella.h"
+
+  export *
+  module * { export * }
+}
