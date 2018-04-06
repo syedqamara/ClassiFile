@@ -4,8 +4,8 @@ An Open Source Mac app to created Automated Swift Classes + Extensions for your 
 ## In-App Models
 There are few models we have defined to draw dynamic code.
 * **A**: `Class` is a model which is crystal clear with name. `Class` has few attributes that define its prior logic.
-        * **1**: `name` which store the name of class.
-        * **2**: `variables` is an Array of type `Variable` this array contains all entered variables.
+    * **1**: `name` which store the name of class.
+    * **2**: `variables` is an Array of type `Variable` this array contains all entered variables.
             to add a variable in class you can use below method.
             
     `classObj.addVariable(name: "id", variableType: .string, shouldHaveSort: true, shouldHaveFilter: false)`
