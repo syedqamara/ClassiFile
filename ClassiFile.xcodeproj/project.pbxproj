@@ -26,6 +26,9 @@
 		526C478520681B8C0056B6EE /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C477B20681B8C0056B6EE /* Variable.swift */; };
 		526C478620681B8C0056B6EE /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C477C20681B8C0056B6EE /* Function.swift */; };
 		52FF93792073B7E300F4A3F8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 52FF93782073B7E300F4A3F8 /* README.md */; };
+		52FF937E2077BEF600F4A3F8 /* StoryboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF937D2077BEF600F4A3F8 /* StoryboardVC.swift */; };
+		52FF93822077C0FB00F4A3F8 /* StoryboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF93812077C0FB00F4A3F8 /* StoryboardHandler.swift */; };
+		52FF93862077C2B000F4A3F8 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FF93852077C2B000F4A3F8 /* Storyboard.swift */; };
 		86FAFA45CC5F1D1EE284B495 /* Pods_ClassiFile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE56F98399B32203C6B63478 /* Pods_ClassiFile.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +76,9 @@
 		526C477B20681B8C0056B6EE /* Variable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		526C477C20681B8C0056B6EE /* Function.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		52FF93782073B7E300F4A3F8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		52FF937D2077BEF600F4A3F8 /* StoryboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardVC.swift; sourceTree = "<group>"; };
+		52FF93812077C0FB00F4A3F8 /* StoryboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardHandler.swift; sourceTree = "<group>"; };
+		52FF93852077C2B000F4A3F8 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		702844598B7984EBEAE14825 /* Pods-ClassiFileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClassiFileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClassiFileTests/Pods-ClassiFileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7C6F8DEFF83A0F9B15F05884 /* Pods_ClassiFileUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClassiFileUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87A6F7007F6924D941C4EC75 /* Pods-ClassiFileUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClassiFileUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClassiFileUITests/Pods-ClassiFileUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -135,9 +141,9 @@
 		526C474320681A820056B6EE /* ClassiFile */ = {
 			isa = PBXGroup;
 			children = (
+				52FF937A2077BEC600F4A3F8 /* ViewControllers */,
 				52FF93782073B7E300F4A3F8 /* README.md */,
 				526C474420681A820056B6EE /* AppDelegate.swift */,
-				526C474620681A820056B6EE /* ViewController.swift */,
 				526C477020681B8C0056B6EE /* Helper */,
 				526C477220681B8C0056B6EE /* Model Extensions */,
 				526C477520681B8C0056B6EE /* Models */,
@@ -171,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				526C477120681B8C0056B6EE /* ModelManager.swift */,
+				52FF93812077C0FB00F4A3F8 /* StoryboardHandler.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -187,6 +194,40 @@
 		526C477520681B8C0056B6EE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				52FF93842077C2A300F4A3F8 /* Storify */,
+				52FF93832077C28900F4A3F8 /* Modelify */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		52FF937A2077BEC600F4A3F8 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				52FF937C2077BEDD00F4A3F8 /* StoryboardVC */,
+				52FF937B2077BED200F4A3F8 /* ClassGeneraterVC */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		52FF937B2077BED200F4A3F8 /* ClassGeneraterVC */ = {
+			isa = PBXGroup;
+			children = (
+				526C474620681A820056B6EE /* ViewController.swift */,
+			);
+			path = ClassGeneraterVC;
+			sourceTree = "<group>";
+		};
+		52FF937C2077BEDD00F4A3F8 /* StoryboardVC */ = {
+			isa = PBXGroup;
+			children = (
+				52FF937D2077BEF600F4A3F8 /* StoryboardVC.swift */,
+			);
+			path = StoryboardVC;
+			sourceTree = "<group>";
+		};
+		52FF93832077C28900F4A3F8 /* Modelify */ = {
+			isa = PBXGroup;
+			children = (
 				526C477620681B8C0056B6EE /* Parameter.swift */,
 				526C477720681B8C0056B6EE /* Enumerations.swift */,
 				526C477820681B8C0056B6EE /* Extension.swift */,
@@ -195,7 +236,15 @@
 				526C477B20681B8C0056B6EE /* Variable.swift */,
 				526C477C20681B8C0056B6EE /* Function.swift */,
 			);
-			path = Models;
+			path = Modelify;
+			sourceTree = "<group>";
+		};
+		52FF93842077C2A300F4A3F8 /* Storify */ = {
+			isa = PBXGroup;
+			children = (
+				52FF93852077C2B000F4A3F8 /* Storyboard.swift */,
+			);
+			path = Storify;
 			sourceTree = "<group>";
 		};
 		A630CD2D7F08E501AC312775 /* Frameworks */ = {
@@ -515,7 +564,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				526C478120681B8C0056B6EE /* Enumerations.swift in Sources */,
+				52FF93862077C2B000F4A3F8 /* Storyboard.swift in Sources */,
 				526C474720681A820056B6EE /* ViewController.swift in Sources */,
+				52FF937E2077BEF600F4A3F8 /* StoryboardVC.swift in Sources */,
+				52FF93822077C0FB00F4A3F8 /* StoryboardHandler.swift in Sources */,
 				526C474520681A820056B6EE /* AppDelegate.swift in Sources */,
 				526C478620681B8C0056B6EE /* Function.swift in Sources */,
 				526C477E20681B8C0056B6EE /* String.swift in Sources */,
