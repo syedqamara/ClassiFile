@@ -12,7 +12,7 @@ ClassiFile [Download📥](https://drive.google.com/file/d/1SLsNjmOjz9kSC7gyyxwlQ
 ### Add Variables
 In below input area you can add you variable by entering their *name*, *type*, *need sort method*, *need filter and find method* and then click on *Add* button.
 
-![Logo](./screenshot1.png)
+![Logo](./screenshot3.png)
 
 ### Generate Class
 When ever you add a variable you can see it in a list for with variable name and their complete information.
@@ -22,7 +22,7 @@ When ever you add a variable you can see it in a list for with variable name and
 ### Save Files.
 Finaly click on Save button to successfully save you class.
 
-![Logo](./screenshot3.png)
+![Logo](./screenshot1.png)
 
 ## In-App Models
 There are few models we have defined to draw dynamic code.
