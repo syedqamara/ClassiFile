@@ -1,4 +1,4 @@
-# ClassiFile(1.0) <img src="classifileicon.png" alt="drawing" style="width: 10px;"/>
+# ClassiFile(1.0) <img src="classifileicon.png" alt="drawing" width="20" height="20" />
 
 An Open Source Mac app to created Automated Swift Classes + Extensions for your model
 
