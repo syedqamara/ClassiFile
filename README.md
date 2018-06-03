@@ -1,4 +1,4 @@
-# ClassiFile(1.0) ![Logo](./classifileicon.png)
+# ClassiFile(1.0) ![Logo](./classifileicon.png=20px)
 
 An Open Source Mac app to created Automated Swift Classes + Extensions for your model
 
