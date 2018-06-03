@@ -23,16 +23,47 @@
 import Cocoa
 import WebKit
 
-class ClassesViewController: NSViewController {
+class ClassesViewController: NSViewController, EditClassViewControllerDelegate {
     
+    var currentClass = Class()
+    var isNight = true
     @IBOutlet weak var textView: NSTextView!
     @IBOutlet weak var outlineView: NSOutlineView!
     var feeds = [Class]()
     let dateFormatter = DateFormatter()
     
+    @IBOutlet weak var nightModelButton: NSButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        changeNightButtonTitle()
+    }
+    func changeNightButtonTitle() {
+        if isNight {
+            nightModelButton.title = "Light Mode"
+        }else {
+            nightModelButton.title = "Night Mode"
+        }
+    }
+    
+    @IBAction func nightModeButtonIsClicked(_ sender: Any) {
+        isNight = !isNight
+        var color = NSColor.white
+        if isNight {
+            color = NSColor.black
+            normalColor = NSColor.white
+        }else {
+            normalColor = NSColor.black
+            color = NSColor.white
+        }
+        changeNightButtonTitle()
+        NSAnimationContext.runAnimationGroup({ (context) in
+            context.duration = 0.5
+            self.textView.animator().backgroundColor = color
+        }, completionHandler: {
+            self.changeTextViewText()
+        })
         
+        outlineView.reloadData()
     }
     
     @IBAction func doubleClickedItem(_ sender: NSOutlineView) {
@@ -144,6 +175,8 @@ extension ClassesViewController: NSOutlineViewDelegate, TextEditVCDelegate {
                     }
 //                    button?.tag = tableColumn.r
                     button?.action = #selector(ClassesViewController.didTapEditButtonAtIndex(button:))
+                    cell.classEditButton.tag = index
+                    cell.classEditButton.action = #selector(ClassesViewController.didTapEditClassButton(button:))
                 }
             }
         } else if let feedItem = item as? Variable {
@@ -165,6 +198,10 @@ extension ClassesViewController: NSOutlineViewDelegate, TextEditVCDelegate {
                     textField.stringValue = feedItem.name
                     textField.sizeToFit()
                 }
+                if let cellView = view as? VariableCell {
+                    cellView.editButton.variable = feedItem
+                    cellView.editButton.action = #selector(ClassesViewController.didTapVariableEditButtonAtIndex(button:))
+                }
             }
         }
         //More code here
@@ -173,23 +210,65 @@ extension ClassesViewController: NSOutlineViewDelegate, TextEditVCDelegate {
     @objc func didTapEditButtonAtIndex(button: NSButton) {
         self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "edit"), sender: button)
     }
+    @objc func didTapEditClassButton(button: NSButton) {
+        self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "editClass"), sender: button)
+    }
+    @objc func didTapVariableEditButtonAtIndex(button: NSButton) {
+        self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "edit"), sender: button)
+    }
     func textIsChange(viewController: TextEditViewController, text: String, isChanged: Bool, forIndex: Int) {
         let oldName = PostManRequestManager.shared.classes[forIndex].name
         MBProgressHUD.showAdded(to: viewController.view, animated: true)
         DispatchQueue.global(qos: .background).async {
             PostManRequestManager.shared.classes.updateClassName(oldName, className: text, forIndex)
-            self.feeds = PostManRequestManager.shared.classes
-            DispatchQueue.main.async {
-                MBProgressHUD.hideAllHUDs(for: viewController.view, animated: true)
-                self.dismissViewController(viewController)
-                self.outlineView.reloadData()
-            }
+            self.reloadScreen(viewController: viewController)
+        }
+    }
+    func changedClass(classObject: Class, from viewController: ViewController) {
+        let index = PostManRequestManager.shared.classes.findIndex(classObject)
+        if index != -1 {
+            PostManRequestManager.shared.classes[index] = classObject
+        }
+        reloadScreen(viewController: viewController)
+    }
+    func reloadScreen(viewController: NSViewController) {
+        self.feeds = PostManRequestManager.shared.classes
+        DispatchQueue.main.async {
+            MBProgressHUD.hideAllHUDs(for: viewController.view, animated: true)
+            self.dismissViewController(viewController)
+            self.outlineView.reloadData()
+            self.changeTextViewText()
         }
     }
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         if segue.identifier?.rawValue == "edit" {
-            let destVC = segue.destinationController as! TextEditViewController
-            let button = sender as! NSButton
+            openTextEditViewController(segue: segue, sender: sender)
+        }
+        else if segue.identifier?.rawValue == "editClass" {
+            openClassEditViewController(segue: segue, sender: sender)
+        }
+    }
+    
+    func openClassEditViewController(segue: NSStoryboardSegue, sender: Any?) {
+        let destVC = segue.destinationController as! ViewController
+        if let button = sender as? NSButton {
+            destVC.isEditMode = true
+            destVC.classObj = self.feeds[button.tag]
+        }
+        destVC.delegate = self
+    }
+    func openTextEditViewController(segue: NSStoryboardSegue, sender: Any?) {
+        let destVC = segue.destinationController as! TextEditViewController
+        if let button = sender as? VariableButton, let variable = button.variable, let indexPath = feeds.getIndexPathOfVariable(variable) {
+            destVC.selectedSection = indexPath.section
+            destVC.selectedIndex = indexPath.item
+            destVC.oldText = variable.name
+            destVC.changedVariabled(completion: { (textEdit) in
+                PostManRequestManager.shared.classes[textEdit.section].variables[textEdit.index].name = textEdit.text
+                self.reloadScreen(viewController: textEdit.viewController)
+            })
+        }
+        else if let button = sender as? NSButton {
             destVC.selectedIndex = button.tag
             destVC.oldText = feeds[button.tag].name
             destVC.delegate = self
@@ -205,9 +284,12 @@ extension ClassesViewController: NSOutlineViewDelegate, TextEditVCDelegate {
         let selectedIndex = outlineView.selectedRow
         
         if let classObj = outlineView.item(atRow: selectedIndex) as? Class {
-            self.textView.string = ""
-            self.textView.textStorage?.append(classObj.colorfullCompleteClass)
-            
+            self.currentClass = classObj
+            changeTextViewText()
         }
+    }
+    func changeTextViewText() {
+        self.textView.string = ""
+        self.textView.textStorage?.append(self.currentClass.colorfullCompleteClass)
     }
 }

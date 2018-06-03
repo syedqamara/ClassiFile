@@ -19,6 +19,37 @@ extension Array where Element: Class {
         }
         return -1
     }
+    func findVariableIndex(_ variable: Variable) -> Int {
+        var index = 0
+        for c in self {
+            if c.variables.findVariableIndex(variable) != -1 {
+                return index
+            }
+            index += 1
+        }
+        return -1
+    }
+    func getIndexPathOfVariable(_ variable: Variable) -> IndexPath? {
+        let sectionIndex = self.findVariableIndex(variable)
+        if sectionIndex != -1 {
+            let index = self[sectionIndex].variables.findVariableIndex(variable)
+            if index != -1 {
+                let indexPath = IndexPath(item: index, section: sectionIndex)
+                return indexPath
+            }
+        }
+        return nil
+    }
+    func updateVariable(_ variable: Variable) {
+        let sectionIndex = self.findVariableIndex(variable)
+        if sectionIndex != -1 {
+            let index = self[sectionIndex].variables.findVariableIndex(variable)
+            if index != -1 {
+                self[sectionIndex].variables[index] = variable
+            }
+        }
+    }
+    
     func updateClassName(_ oldName: String, className: String, _ index: Int) {
         self[index].name = className
         for classObj in self {
@@ -52,6 +83,16 @@ extension Array where Element: Variable {
         return self.filter({ (variable) -> Bool in
             return variable.variableID == id
         }).first
+    }
+    func findVariableIndex(_ variable: Variable) -> Int {
+        var index = 0
+        for c in self {
+            if c.variableID == variable.variableID {
+                return index
+            }
+            index += 1
+        }
+        return -1
     }
 }
 /*

@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-
+var normalColor = NSColor.white
 extension NSColor {
     class var purpleCodeColor: NSColor {
 //        return NSColor(calibratedRed: 190, green: 47, blue: 180, alpha: 1.0)
@@ -61,7 +61,7 @@ extension String {
         return codeColorFullString(color: color)
     }
     var normalWord: NSAttributedString {
-        let color = NSColor.black
+        let color = normalColor
         return codeColorFullString(color: color)
     }
     

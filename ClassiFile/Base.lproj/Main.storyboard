@@ -1079,6 +1079,7 @@
                         <outlet property="nameTextField" destination="4NT-Ah-Zdu" id="l0p-B8-Zoc"/>
                         <outlet property="sortCheckBox" destination="jDh-cB-xZD" id="7zv-sq-jzu"/>
                         <outlet property="tableView" destination="45O-tG-kCr" id="TdK-8p-UO1"/>
+                        <outlet property="topView" destination="DKK-EP-CXd" id="cfz-I0-Um4"/>
                         <outlet property="typeOption" destination="uY0-9v-QTm" id="ih5-c8-OT1"/>
                     </connections>
                 </viewController>
@@ -1091,7 +1092,7 @@
             <objects>
                 <viewController id="HpO-sN-nsr" customClass="ClassesViewController" customModule="ClassiFile" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="0aG-7A-wSp">
-                        <rect key="frame" x="0.0" y="0.0" width="1647" height="593"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1647" height="643"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tyd-3R-3yq">
@@ -1142,19 +1143,29 @@
                                                                                 <font key="font" metaFont="system"/>
                                                                             </buttonCell>
                                                                         </button>
+                                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nCG-BN-K0d">
+                                                                            <rect key="frame" x="224" y="8" width="68" height="25"/>
+                                                                            <buttonCell key="cell" type="squareTextured" title="Edit Class" bezelStyle="texturedSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QnD-ei-zQO">
+                                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                <font key="font" metaFont="system"/>
+                                                                            </buttonCell>
+                                                                        </button>
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstItem="kPa-7S-zX1" firstAttribute="centerY" secondItem="Q5x-4u-YXd" secondAttribute="centerY" id="GOh-jd-C2I"/>
                                                                         <constraint firstItem="kPa-7S-zX1" firstAttribute="leading" secondItem="Q5x-4u-YXd" secondAttribute="trailing" constant="8" id="R8f-mm-8JM"/>
                                                                         <constraint firstItem="Q5x-4u-YXd" firstAttribute="centerY" secondItem="qOB-pz-2GN" secondAttribute="centerY" id="X1d-ld-HJA"/>
                                                                         <constraint firstItem="Q5x-4u-YXd" firstAttribute="leading" secondItem="qOB-pz-2GN" secondAttribute="leading" constant="2" id="agx-H9-uOA"/>
+                                                                        <constraint firstItem="nCG-BN-K0d" firstAttribute="leading" secondItem="kPa-7S-zX1" secondAttribute="trailing" constant="10" id="cGh-FO-xYB"/>
+                                                                        <constraint firstItem="nCG-BN-K0d" firstAttribute="centerY" secondItem="kPa-7S-zX1" secondAttribute="centerY" id="wGP-Hr-4P6"/>
                                                                     </constraints>
                                                                     <connections>
+                                                                        <outlet property="classEditButton" destination="nCG-BN-K0d" id="tgj-KM-8vI"/>
                                                                         <outlet property="editButton" destination="kPa-7S-zX1" id="CSh-xA-rRt"/>
                                                                         <outlet property="textField" destination="Q5x-4u-YXd" id="mcx-cf-n32"/>
                                                                     </connections>
                                                                 </tableCellView>
-                                                                <tableCellView identifier="FeedItemCell" id="qqe-L9-88s">
+                                                                <tableCellView identifier="FeedItemCell" id="qqe-L9-88s" customClass="VariableCell" customModule="ClassiFile" customModuleProvider="target">
                                                                     <rect key="frame" x="1" y="43" width="339" height="40"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
@@ -1166,12 +1177,22 @@
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
+                                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BkX-vt-bgn" customClass="VariableButton" customModule="ClassiFile" customModuleProvider="target">
+                                                                            <rect key="frame" x="122" y="8" width="94" height="25"/>
+                                                                            <buttonCell key="cell" type="squareTextured" title="Change Name" bezelStyle="texturedSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9Xx-6G-cyO">
+                                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                <font key="font" metaFont="system"/>
+                                                                            </buttonCell>
+                                                                        </button>
                                                                     </subviews>
                                                                     <constraints>
+                                                                        <constraint firstItem="BkX-vt-bgn" firstAttribute="centerY" secondItem="QfK-tU-RCG" secondAttribute="centerY" id="CDK-wM-8kz"/>
+                                                                        <constraint firstItem="BkX-vt-bgn" firstAttribute="leading" secondItem="QfK-tU-RCG" secondAttribute="trailing" constant="10" id="CGx-tM-vhw"/>
                                                                         <constraint firstItem="QfK-tU-RCG" firstAttribute="leading" secondItem="qqe-L9-88s" secondAttribute="leading" constant="2" id="LG2-Pz-uD4"/>
                                                                         <constraint firstItem="QfK-tU-RCG" firstAttribute="centerY" secondItem="qqe-L9-88s" secondAttribute="centerY" id="yrO-ps-KsQ"/>
                                                                     </constraints>
                                                                     <connections>
+                                                                        <outlet property="editButton" destination="BkX-vt-bgn" id="elI-hS-KfP"/>
                                                                         <outlet property="textField" destination="QfK-tU-RCG" id="TDH-MH-saP"/>
                                                                     </connections>
                                                                 </tableCellView>
@@ -1246,7 +1267,7 @@
                                                 <textView importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="zOW-wz-6Wn">
                                                     <rect key="frame" x="0.0" y="0.0" width="995" height="591"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <size key="minSize" width="995" height="591"/>
                                                     <size key="maxSize" width="1147" height="10000000"/>
                                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1279,18 +1300,36 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gzr-ed-Xaf">
+                                <rect key="frame" x="1531" y="601" width="112" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="mvt-bz-tf9"/>
+                                    <constraint firstAttribute="height" constant="25" id="nMU-Xv-DGG"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="NightMode" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ura-go-6O6">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="nightModeButtonIsClicked:" target="HpO-sN-nsr" id="0zl-Z7-fzf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Tyd-3R-3yq" firstAttribute="leading" secondItem="0aG-7A-wSp" secondAttribute="leading" id="6uo-Wx-lvc"/>
-                            <constraint firstItem="Tyd-3R-3yq" firstAttribute="top" secondItem="0aG-7A-wSp" secondAttribute="top" id="TeB-bp-put"/>
+                            <constraint firstAttribute="trailing" secondItem="gzr-ed-Xaf" secondAttribute="trailing" constant="10" id="Ogc-HR-OOZ"/>
+                            <constraint firstItem="Tyd-3R-3yq" firstAttribute="top" secondItem="0aG-7A-wSp" secondAttribute="top" constant="50" id="TeB-bp-put"/>
                             <constraint firstAttribute="bottom" secondItem="Tyd-3R-3yq" secondAttribute="bottom" id="cGS-w3-6pN"/>
+                            <constraint firstItem="gzr-ed-Xaf" firstAttribute="top" secondItem="0aG-7A-wSp" secondAttribute="top" constant="10" id="g2u-GS-P76"/>
                             <constraint firstAttribute="trailing" secondItem="Tyd-3R-3yq" secondAttribute="trailing" id="tVO-Ou-KKh"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="nightModelButton" destination="gzr-ed-Xaf" id="7oj-YT-oYO"/>
                         <outlet property="outlineView" destination="f19-Dw-avH" id="D8r-5t-jvI"/>
                         <outlet property="textView" destination="zOW-wz-6Wn" id="46f-BH-Jy3"/>
                         <segue destination="bVz-ub-hkv" kind="sheet" identifier="edit" id="9Qw-Fd-iC3"/>
+                        <segue destination="XfG-lQ-9wD" kind="sheet" identifier="editClass" id="ffP-s8-xHs"/>
                     </connections>
                 </viewController>
                 <customObject id="8Br-sg-oSs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1302,4 +1341,7 @@
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ffP-s8-xHs"/>
+    </inferredMetricsTieBreakers>
 </document>

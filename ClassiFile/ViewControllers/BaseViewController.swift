@@ -22,3 +22,6 @@ class KeyCaptureWindow: NSWindow {
     
     
 }
+class VariableButton: NSButton {
+    var variable: Variable?
+}

@@ -14,8 +14,12 @@ enum ColoumnIdentifier: String {
     case filter = "3"
     case sort = "4"
 }
+protocol EditClassViewControllerDelegate: NSObjectProtocol {
+    func changedClass(classObject: Class, from viewController: ViewController)
+}
 
 class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+    @IBOutlet weak var topView: NSView!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var nameTextField: NSTextField!
     @IBOutlet weak var typeOption: NSPopUpButton!
@@ -23,6 +27,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     @IBOutlet weak var filterCheckBox: NSButton!
     @IBOutlet weak var classNameTF: NSTextField!
     
+    var isEditMode = false
+    var delegate: EditClassViewControllerDelegate?
     
     var classObj = Class()
     var resetVariableFields: Void {
@@ -30,6 +36,9 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         sortCheckBox.state = NSControl.StateValue.off
         filterCheckBox.state = NSControl.StateValue.off
         typeOption.select(typeOption.itemArray.first)
+        if isEditMode {
+            topView.isHidden = true
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,9 +137,15 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     @IBAction func didTapSaveButton(_ sender: Any) {
-        let classNameObj = classNameTF.stringValue.replacingOccurrences(of: ".swfit", with: "")
-        classObj.name = classNameObj
-        saveClass()
+        if isEditMode {
+            if let del = self.delegate {
+                del.changedClass(classObject: classObj, from: self)
+            }
+        }else {
+            let classNameObj = classNameTF.stringValue.replacingOccurrences(of: ".swfit", with: "")
+            classObj.name = classNameObj
+            saveClass()
+        }
     }
     @IBAction func didTapPlusButton(_ sender: Any) {
         let newVar = Variable()
