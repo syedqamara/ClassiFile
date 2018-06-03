@@ -131,7 +131,7 @@ extension ClassesViewController: NSOutlineViewDelegate {
       } else {
             view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "FeedCell"), owner: self) as? NSTableCellView
         if let textField = view?.textField {
-          textField.stringValue = feed.name
+          textField.stringValue = feed.name + ".swift"
           textField.sizeToFit()
         }
       }
@@ -170,6 +170,7 @@ extension ClassesViewController: NSOutlineViewDelegate {
     let selectedIndex = outlineView.selectedRow
     
     if let classObj = outlineView.item(atRow: selectedIndex) as? Class {
+        self.textView.string = ""
         self.textView.textStorage?.append(classObj.colorfullCompleteClass)
         
     }
