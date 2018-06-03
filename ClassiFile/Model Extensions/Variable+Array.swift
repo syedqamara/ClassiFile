@@ -8,6 +8,29 @@
 
 import Cocoa
 
+extension Array where Element: Class {
+    func findIndex(_ classObj: Class) -> Int {
+        var index = 0
+        for c in self {
+            if c.classID == classObj.classID {
+                return index
+            }
+            index += 1
+        }
+        return -1
+    }
+    func updateClassName(_ oldName: String, className: String, _ index: Int) {
+        self[index].name = className
+        for classObj in self {
+            for variable in classObj.variables {
+                if variable.getVariableTypeName == oldName {
+                    variable.customTypeName = className
+                }
+            }
+        }
+    }
+}
+
 extension Array where Element: Variable {
     var haveAnyFilterFindMethodRequest: Bool {
         return variablesWithFilterFindMethodReqeust.count > 0

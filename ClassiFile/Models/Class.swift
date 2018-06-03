@@ -18,6 +18,7 @@ enum MarkType: String {
 }
 
 class Class: File {
+    var classID: String = UUID.init().uuidString
     var variables = [Variable]()
     
     ///Contains complete code for your class as string

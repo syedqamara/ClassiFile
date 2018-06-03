@@ -8,6 +8,12 @@
 
 import Cocoa
 
+extension NSWindow {
+    open override func keyUp(with event: NSEvent) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WindowKeyEventFire"), object: event)
+    }
+}
+
 extension String {
     var toDict: [String: Any]? {
         if let data = self.data(using: .utf8) {

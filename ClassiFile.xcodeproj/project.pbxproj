@@ -22,6 +22,9 @@
 		2926755420C34B8F00709C4B /* PostmanJsonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926755320C34B8F00709C4B /* PostmanJsonViewController.swift */; };
 		295ABFB120C3518E00F599F3 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 295ABFB020C3518E00F599F3 /* MBProgressHUD.m */; };
 		295ABFB320C358CC00F599F3 /* ClassesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295ABFB220C358CB00F599F3 /* ClassesViewController.swift */; };
+		295ABFB620C3896900F599F3 /* ClassCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295ABFB520C3896900F599F3 /* ClassCellView.swift */; };
+		295ABFB820C389C400F599F3 /* TextEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295ABFB720C389C400F599F3 /* TextEditViewController.swift */; };
+		295ABFBA20C3979700F599F3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295ABFB920C3979700F599F3 /* BaseViewController.swift */; };
 		526C474520681A820056B6EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C474420681A820056B6EE /* AppDelegate.swift */; };
 		526C474720681A820056B6EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C474620681A820056B6EE /* ViewController.swift */; };
 		526C474920681A820056B6EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 526C474820681A820056B6EE /* Assets.xcassets */; };
@@ -73,6 +76,9 @@
 		295ABFAF20C3518E00F599F3 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		295ABFB020C3518E00F599F3 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		295ABFB220C358CB00F599F3 /* ClassesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassesViewController.swift; sourceTree = "<group>"; };
+		295ABFB520C3896900F599F3 /* ClassCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassCellView.swift; sourceTree = "<group>"; };
+		295ABFB720C389C400F599F3 /* TextEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditViewController.swift; sourceTree = "<group>"; };
+		295ABFB920C3979700F599F3 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		389DD62772A2DA47AD8EEF43 /* Pods-ClassiFileUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClassiFileUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClassiFileUITests/Pods-ClassiFileUITests.release.xcconfig"; sourceTree = "<group>"; };
 		449D8B7495AA18302EA75047 /* Pods-ClassiFileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClassiFileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClassiFileTests/Pods-ClassiFileTests.release.xcconfig"; sourceTree = "<group>"; };
 		526C474120681A820056B6EE /* ClassiFile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassiFile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +146,8 @@
 				526C474620681A820056B6EE /* ViewController.swift */,
 				295ABFB220C358CB00F599F3 /* ClassesViewController.swift */,
 				2926755320C34B8F00709C4B /* PostmanJsonViewController.swift */,
+				295ABFB720C389C400F599F3 /* TextEditViewController.swift */,
+				295ABFB920C3979700F599F3 /* BaseViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -152,6 +160,14 @@
 				295ABFAE20C3518D00F599F3 /* ClassiFile-Bridging-Header.h */,
 			);
 			path = LoadingHUD;
+			sourceTree = "<group>";
+		};
+		295ABFB420C3895100F599F3 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				295ABFB520C3896900F599F3 /* ClassCellView.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		526C473820681A820056B6EE = {
@@ -179,6 +195,7 @@
 		526C474320681A820056B6EE /* ClassiFile */ = {
 			isa = PBXGroup;
 			children = (
+				295ABFB420C3895100F599F3 /* CustomViews */,
 				295ABFAD20C3517D00F599F3 /* LoadingHUD */,
 				52FF93782073B7E300F4A3F8 /* README.md */,
 				526C474420681A820056B6EE /* AppDelegate.swift */,
@@ -579,7 +596,9 @@
 				2926753F20C3473600709C4B /* PostManRequestManager.swift in Sources */,
 				2926754D20C3474A00709C4B /* PostmanItem.swift in Sources */,
 				526C478020681B8C0056B6EE /* Parameter.swift in Sources */,
+				295ABFB820C389C400F599F3 /* TextEditViewController.swift in Sources */,
 				2926754A20C3474A00709C4B /* PostMan.swift in Sources */,
+				295ABFBA20C3979700F599F3 /* BaseViewController.swift in Sources */,
 				526C477D20681B8C0056B6EE /* ModelManager.swift in Sources */,
 				2926755120C3474A00709C4B /* Request.swift in Sources */,
 				526C478320681B8C0056B6EE /* File.swift in Sources */,
@@ -591,6 +610,7 @@
 				2926755020C3474A00709C4B /* String.swift in Sources */,
 				2926754120C3473F00709C4B /* Extensions.swift in Sources */,
 				2926754E20C3474A00709C4B /* KeyValuePair.swift in Sources */,
+				295ABFB620C3896900F599F3 /* ClassCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

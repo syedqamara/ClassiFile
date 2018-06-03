@@ -33,6 +33,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.delegate = self
         tableView.dataSource = self
         self.resetVariableFields
