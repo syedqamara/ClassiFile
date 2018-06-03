@@ -25,20 +25,14 @@ import WebKit
 
 class ClassesViewController: NSViewController {
   
-  @IBOutlet weak var webView: WebView!
+  @IBOutlet weak var textView: NSTextView!
   @IBOutlet weak var outlineView: NSOutlineView!
-  var feeds = [Feed]()
+  var feeds = [Class]()
   let dateFormatter = DateFormatter()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    dateFormatter.dateStyle = .short
-    
-    if let filePath = Bundle.main.path(forResource: "Feeds", ofType: "plist") {
-      feeds = Feed.feedList(filePath)
-      print(feeds)
-    }
   }
   
   @IBAction func doubleClickedItem(_ sender: NSOutlineView) {
@@ -46,7 +40,7 @@ class ClassesViewController: NSViewController {
     let item = sender.item(atRow: sender.clickedRow)
     
     //2
-    if item is Feed {
+    if item is Class {
       //3
       if sender.isItemExpanded(item) {
         sender.collapseItem(item)
@@ -73,7 +67,7 @@ class ClassesViewController: NSViewController {
     if let item = outlineView.item(atRow: selectedRow) {
       
       //4
-      if let item = item as? Feed {
+      if let item = item as? Class {
         //5
         if let index = self.feeds.index( where: {$0.name == item.name} ) {
           //6
@@ -81,12 +75,12 @@ class ClassesViewController: NSViewController {
           //7
           outlineView.removeItems(at: IndexSet(integer: selectedRow), inParent: nil, withAnimation: .slideLeft)
         }
-      } else if let item = item as? FeedItem {
+      } else if let item = item as? Variable {
         //8
         for feed in self.feeds {
           //9
-          if let index = feed.children.index( where: {$0.title == item.title} ) {
-            feed.children.remove(at: index)
+          if let index = feed.variables.index( where: {$0.name == item.name} ) {
+            feed.variables.remove(at: index)
             outlineView.removeItems(at: IndexSet(integer: index), inParent: feed, withAnimation: .slideLeft)
           }
         }
@@ -99,24 +93,24 @@ class ClassesViewController: NSViewController {
 extension ClassesViewController: NSOutlineViewDataSource {
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
     //1
-    if let feed = item as? Feed {
-      return feed.children.count
+    if let feed = item as? Class {
+      return feed.variables.count
     }
     //2
     return feeds.count
   }
   
   func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-    if let feed = item as? Feed {
-      return feed.children[index]
+    if let feed = item as? Class {
+      return feed.variables[index]
     }
     
     return feeds[index]
   }
   
   func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-    if let feed = item as? Feed {
-      return feed.children.count > 0
+    if let feed = item as? Class {
+      return feed.variables.count > 0
     }
     
     return false
@@ -127,37 +121,37 @@ extension ClassesViewController: NSOutlineViewDelegate {
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
     var view: NSTableCellView?
     //1
-    if let feed = item as? Feed {
-      if tableColumn?.identifier == "DateColumn" {
-        view = outlineView.make(withIdentifier: "DateCell", owner: self) as? NSTableCellView
+    if let feed = item as? Class {
+        if (tableColumn?.identifier)!.rawValue == "DateColumn" {
+            view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DateCell"), owner: self) as? NSTableCellView
         if let textField = view?.textField {
           textField.stringValue = ""
           textField.sizeToFit()
         }
       } else {
-        view = outlineView.make(withIdentifier: "FeedCell", owner: self) as? NSTableCellView
+            view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "FeedCell"), owner: self) as? NSTableCellView
         if let textField = view?.textField {
           textField.stringValue = feed.name
           textField.sizeToFit()
         }
       }
-    } else if let feedItem = item as? FeedItem {
+    } else if let feedItem = item as? Variable {
       //1
-      if tableColumn?.identifier == "DateColumn" {
+        if (tableColumn?.identifier)!.rawValue == "DateColumn" {
         //2
-        view = outlineView.make(withIdentifier: "DateCell", owner: self) as? NSTableCellView
+            view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "DateCell"), owner: self) as? NSTableCellView
         
         if let textField = view?.textField {
           //3
-          textField.stringValue = dateFormatter.string(from: feedItem.publishingDate)
+          textField.attributedStringValue = feedItem.getAttributedVariableTypeName
           textField.sizeToFit()
         }
       } else {
         //4
-        view = outlineView.make(withIdentifier: "FeedItemCell", owner: self) as? NSTableCellView
+            view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "FeedItemCell"), owner: self) as? NSTableCellView
         if let textField = view?.textField {
           //5
-          textField.stringValue = feedItem.title
+          textField.stringValue = feedItem.name
           textField.sizeToFit()
         }
       }
@@ -175,14 +169,9 @@ extension ClassesViewController: NSOutlineViewDelegate {
     //2
     let selectedIndex = outlineView.selectedRow
     
-    if let feedItem = outlineView.item(atRow: selectedIndex) as? FeedItem {
-      //3
-      let url = URL(string: feedItem.url)
-      //4
-      if let url = url {
-        //5
-        self.webView.mainFrame.load(URLRequest(url: url))
-      }
+    if let classObj = outlineView.item(atRow: selectedIndex) as? Class {
+        self.textView.textStorage?.append(classObj.colorfullCompleteClass)
+        
     }
   }
 }

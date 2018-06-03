@@ -59,6 +59,7 @@ class Class: File {
     }
     
     
+    
     var completeInitMethodCode: String {
         var code = "///Initialize \(name) with json" + kBackSlashN
         code = code + "public init(_ json: [String: AnyObject]){\(kBackSlashN)"
@@ -77,12 +78,11 @@ class Class: File {
         for variable in variables {
             code = code + variable.mapMethodLineOfThisVariable
         }
+        code += kBackSlashN + "return json"
         code = code + "}" + kBackSlashN
         code.addMark(MarkType.jsonMapper)
         return code
     }
-    
-    
     
     var shouldCreateExtension: Bool {
         return (variables.haveAnySortMethodRequest || variables.haveAnyFilterFindMethodRequest)
@@ -97,6 +97,74 @@ class Class: File {
         variables.append(variable)
     }
     
+    /// Mark: - Colorfull Code Conversion
+    var colorFullVariableInitialization: NSMutableAttributedString {
+        let mutableString = NSMutableAttributedString()
+        
+        for variable in variables {
+            mutableString.append(variable.colorfullDeclareVariable)
+        }
+        mutableString.append(kBackSlashN.normalWord)
+        mutableString.append("".addColofullMark(MarkType.properties))
+        return mutableString
+    }
+    var colorFullCompleteMappingMethod: NSMutableAttributedString {
+        let mutableString = NSMutableAttributedString()
+        mutableString.append(("\n" + kBackSlashN).commentWord)
+        mutableString.append("\(kTapSpace)public var ".purpleKeyWord)
+        mutableString.append("jsonMap: ".normalWord)
+        mutableString.append(String.dictionaryName)
+        mutableString.append("{\n".normalWord)
+        mutableString.append(Constant.colorfullJsonCreation)
+        for variable in variables {
+            mutableString.append(variable.colorFullMapMethodLineOfThisVariable)
+        }
+        mutableString.append("\(kTapSpace)\(kTapSpace)return ".purpleKeyWord)
+        mutableString.append("json\n\(kTapSpace)}".normalWord)
+        mutableString.append("".addColofullMark(.jsonMapper))
+        return mutableString
+    }
+    var colorFullCompleteInitMethodCode: NSMutableAttributedString {
+        let mutableString = NSMutableAttributedString()
+        mutableString.append(("\n" + kBackSlashN).commentWord)
+        mutableString.append("\(kTapSpace)public init".purpleKeyWord)
+        mutableString.append("(_ json: ".normalWord)
+        mutableString.append(String.dictionaryName)
+        mutableString.append("){\n".normalWord)
+        for variable in variables {
+            mutableString.append(variable.colorfullInitMethodLineOfThisVariable)
+        }
+        mutableString.append("\n\(kTapSpace)}".normalWord)
+//        mutableString.append("".addColofullMark(.initializer))
+        return mutableString
+    }
+    
+    var colorfullCompleteClass: NSMutableAttributedString {
+        let mutableString = NSMutableAttributedString()
+        mutableString.append(("//This is Automatic Created Model \(name)" + kBackSlashN).commentWord)
+        mutableString.append("import ".purpleKeyWord)
+        mutableString.append("Foundation\n\n".normalWord)
+        mutableString.append("class ".purpleKeyWord)
+        mutableString.append("\(name): ".normalWord)
+        mutableString.append("NSObject".blueKeyWord)
+        mutableString.append(" {\n".normalWord)
+        
+        mutableString.append("//Declare all variables for this class\n".commentWord)
+        mutableString.append(colorFullVariableInitialization)
+        mutableString.append("\n".normalWord)
+        
+        mutableString.append("//Declare and implement init(json: [String: AnyObject]) for this class".commentWord)
+        mutableString.append(colorFullCompleteInitMethodCode)
+        mutableString.append("\n".normalWord)
+        
+        mutableString.append("//Declare and implement map()-> [String: AnyObject]".commentWord)
+        mutableString.append(colorFullCompleteMappingMethod)
+        mutableString.append("\n".normalWord)
+        
+        mutableString.append("\n}".normalWord)
+//        mutableString.append("".addColofullMark(.initializer))
+        return mutableString
+    }
 }
 
 

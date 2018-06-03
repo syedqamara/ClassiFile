@@ -24,4 +24,19 @@ enum VariableType: String {
     case bool = "Bool"
     case date = "Date"
     case void = "Void"
+    case customClass = "CustomClass"
+}
+
+enum RequestType: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+}
+
+enum PostmanModeType: String {
+    case raw = "raw"
+    case formData = "form-data"
+    case formdata = "formdata"
+    case xurlform = "x-www-form-urlencoded"
+    case none = ""
 }
