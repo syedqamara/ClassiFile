@@ -27,6 +27,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     @IBOutlet weak var filterCheckBox: NSButton!
     @IBOutlet weak var classNameTF: NSTextField!
     
+    var selectedIndex = -1
     var isEditMode = false
     var delegate: EditClassViewControllerDelegate?
     
@@ -36,13 +37,28 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         sortCheckBox.state = NSControl.StateValue.off
         filterCheckBox.state = NSControl.StateValue.off
         typeOption.select(typeOption.itemArray.first)
-        if isEditMode {
-            topView.isHidden = true
+        selectedIndex = -1
+    }
+    func getControlState(_ isOn: Bool) -> NSControl.StateValue {
+        if isOn {
+            return NSControl.StateValue.on
+        }
+        return NSControl.StateValue.off
+    }
+    var setSelectedVariableFields: Void {
+        if selectedIndex != -1 {
+            nameTextField.stringValue = classObj.variables[selectedIndex].name
+            sortCheckBox.state = getControlState(classObj.variables[selectedIndex].shouldHaveSortMethod)
+            filterCheckBox.state = getControlState(classObj.variables[selectedIndex].shouldHaveFindFilterMethod)
+            let typeObj = classObj.variables[selectedIndex].type.rawValue
+            let item = NSMenuItem(title: typeObj, action: nil, keyEquivalent: typeObj)
+            typeOption.select(item)
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        classNameTF.stringValue = classObj.name
         tableView.delegate = self
         tableView.dataSource = self
         self.resetVariableFields
@@ -89,7 +105,14 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         return nil
     }
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-        return false
+        return true
+    }
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        guard let tableView = notification.object as? NSTableView else {
+            return
+        }
+        self.selectedIndex = tableView.selectedRow
+        self.setSelectedVariableFields
     }
     
     func saveClass() {
@@ -135,9 +158,17 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             }
         }
     }
-    
+    override func keyUp(with event: NSEvent) {
+        if event.keyCode == 53 {
+            self.dismissViewController(self)
+        }
+        else if event.keyCode == 36 {
+            didTapSaveButton(self)
+        }
+    }
     @IBAction func didTapSaveButton(_ sender: Any) {
         if isEditMode {
+            classObj.name = classNameTF.stringValue
             if let del = self.delegate {
                 del.changedClass(classObject: classObj, from: self)
             }
@@ -148,14 +179,21 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         }
     }
     @IBAction func didTapPlusButton(_ sender: Any) {
-        let newVar = Variable()
+        var newVar = Variable()
+        if selectedIndex != -1 {
+            newVar = classObj.variables[selectedIndex]
+        }
         newVar.name = nameTextField.stringValue
         if let titleOfOption = typeOption.selectedItem?.title, let varType = VariableType(rawValue: titleOfOption) {
             newVar.type = varType
         }
         newVar.shouldHaveSortMethod = sortCheckBox.state.rawValue == 1
         newVar.shouldHaveFindFilterMethod = filterCheckBox.state.rawValue == 1
-        classObj.variables.append(newVar)
+        if selectedIndex != -1 {
+            classObj.variables[selectedIndex] = newVar
+        }else {
+            classObj.variables.append(newVar)
+        }
         self.resetVariableFields
         self.tableView.reloadData()
     }

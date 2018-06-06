@@ -20,6 +20,7 @@
 		2926755020C3474A00709C4B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926754820C3474A00709C4B /* String.swift */; };
 		2926755120C3474A00709C4B /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926754920C3474A00709C4B /* Request.swift */; };
 		2926755420C34B8F00709C4B /* PostmanJsonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926755320C34B8F00709C4B /* PostmanJsonViewController.swift */; };
+		2943848120C810DC0018CC57 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943848020C810DC0018CC57 /* MainWindowController.swift */; };
 		295ABFB120C3518E00F599F3 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 295ABFB020C3518E00F599F3 /* MBProgressHUD.m */; };
 		295ABFB320C358CC00F599F3 /* ClassesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295ABFB220C358CB00F599F3 /* ClassesViewController.swift */; };
 		295ABFB620C3896900F599F3 /* ClassCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295ABFB520C3896900F599F3 /* ClassCellView.swift */; };
@@ -72,6 +73,7 @@
 		2926754820C3474A00709C4B /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		2926754920C3474A00709C4B /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		2926755320C34B8F00709C4B /* PostmanJsonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostmanJsonViewController.swift; sourceTree = "<group>"; };
+		2943848020C810DC0018CC57 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		295ABFAE20C3518D00F599F3 /* ClassiFile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ClassiFile-Bridging-Header.h"; sourceTree = "<group>"; };
 		295ABFAF20C3518E00F599F3 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		295ABFB020C3518E00F599F3 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		2926755220C34B4700709C4B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2943847F20C810BE0018CC57 /* MainWindowController */,
 				526C474620681A820056B6EE /* ViewController.swift */,
 				295ABFB220C358CB00F599F3 /* ClassesViewController.swift */,
 				2926755320C34B8F00709C4B /* PostmanJsonViewController.swift */,
@@ -150,6 +153,14 @@
 				295ABFB920C3979700F599F3 /* BaseViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2943847F20C810BE0018CC57 /* MainWindowController */ = {
+			isa = PBXGroup;
+			children = (
+				2943848020C810DC0018CC57 /* MainWindowController.swift */,
+			);
+			path = MainWindowController;
 			sourceTree = "<group>";
 		};
 		295ABFAD20C3517D00F599F3 /* LoadingHUD */ = {
@@ -611,6 +622,7 @@
 				2926754120C3473F00709C4B /* Extensions.swift in Sources */,
 				2926754E20C3474A00709C4B /* KeyValuePair.swift in Sources */,
 				295ABFB620C3896900F599F3 /* ClassCellView.swift in Sources */,
+				2943848120C810DC0018CC57 /* MainWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

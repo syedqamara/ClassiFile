@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClassiFile/ViewControllers/ClassesViewController.swift"
-            timestampString = "549690019.798475"
+            timestampString = "549981514.552628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
             endingLineNumber = "70"
-            landmarkName = "deleteBackward(_:)"
+            landmarkName = "doubleClickedItem(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
