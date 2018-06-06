@@ -553,9 +553,8 @@
                                 </scroller>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Klv-S0-RKP">
-                                <rect key="frame" x="169" y="3" width="112" height="41"/>
+                                <rect key="frame" x="177" y="3" width="96" height="41"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="7oD-98-lTM"/>
                                     <constraint firstAttribute="height" constant="30" id="c9e-j6-Kxf"/>
                                 </constraints>
                                 <buttonCell key="cell" type="push" title="Generate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WcF-Gf-ZKs">
@@ -1345,9 +1344,8 @@
                                 </customSpacing>
                             </stackView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gzr-ed-Xaf">
-                                <rect key="frame" x="1531" y="601" width="112" height="36"/>
+                                <rect key="frame" x="1536" y="601" width="107" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="mvt-bz-tf9"/>
                                     <constraint firstAttribute="height" constant="25" id="nMU-Xv-DGG"/>
                                 </constraints>
                                 <buttonCell key="cell" type="push" title="NightMode" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ura-go-6O6">

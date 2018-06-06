@@ -10,11 +10,9 @@ import Cocoa
 var normalColor = NSColor.white
 extension NSColor {
     class var purpleCodeColor: NSColor {
-//        return NSColor(calibratedRed: 190, green: 47, blue: 180, alpha: 1.0)
         return NSColor.init(named: NSColor.Name(rawValue: "predefinePurpleColor"))!
     }
     class var blueCodeColor: NSColor {
-//        return NSColor(calibratedRed: 104, green: 58, blue: 150, alpha: 1.0)
         return NSColor.init(named: NSColor.Name(rawValue: "codeBlueColor"))!
     }
     class var userdefineCodeColor: NSColor {

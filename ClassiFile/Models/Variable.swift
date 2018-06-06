@@ -126,7 +126,6 @@ class Variable: NSObject {
     ///Mark: - Colofull Code Conversion
     var getAttributedVariableTypeName: NSAttributedString {
         var typeString = ""
-        var color = NSColor.darkGray
         if type == .customClass {
             typeString = customTypeName
             return typeString.userdefineWord
