@@ -44,6 +44,11 @@ class ClassesViewController: NSViewController, EditClassViewControllerDelegate {
             nightModelButton.title = "Night Mode"
         }
     }
+    @IBAction func didTapSaveAllButton(_ sender: Any) {
+        PostManRequestManager.shared.save {
+            print("Saved")
+        }
+    }
     
     @IBAction func nightModeButtonIsClicked(_ sender: Any) {
         isNight = !isNight

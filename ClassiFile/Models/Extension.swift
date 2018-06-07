@@ -10,10 +10,11 @@ import Cocoa
 
 class Extension: File {
     var classRef: Class?
-    
+    var classNameObject = ""
     init(with classObj: Class) {
         super.init()
         classRef = classObj
+        classNameObject = classObj.name
         name = "\(classObj.name)+Utility"
     }
     
@@ -41,6 +42,7 @@ class Extension: File {
             let variables = classObj.variables.variablesWithFilterFindMethodReqeust
             var code = "\n"
             for variable in variables {
+                variable.nameOfClass = self.classNameObject
                 code = code + variable.filterMethod + kBackSlashN
             }
             code = code + kBackSlashN
@@ -54,6 +56,7 @@ class Extension: File {
             let variables = classObj.variables.variablesWithFilterFindMethodReqeust
             var code = "\n"
             for variable in variables {
+                variable.nameOfClass = self.classNameObject
                 code = code + variable.findMethod + kBackSlashN
             }
             code = code + kBackSlashN
@@ -67,6 +70,7 @@ class Extension: File {
             let variables = classObj.variables.variablesWithSortMethodReqeust
             var code = "\n"
             for variable in variables {
+                variable.nameOfClass = self.classNameObject
                 code = code + variable.sortMethod + kBackSlashN
             }
             code = code + kBackSlashN

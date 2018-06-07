@@ -79,7 +79,7 @@ class Class: File {
         for variable in variables {
             code = code + variable.mapMethodLineOfThisVariable
         }
-        code += kBackSlashN + "return json"
+        code += kBackSlashN + "return json\n"
         code = code + "}" + kBackSlashN
         code.addMark(MarkType.jsonMapper)
         return code

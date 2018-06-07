@@ -39,27 +39,30 @@ class PostmanJsonViewController: NSViewController {
         let jsonStr = textView.string
         if let data = jsonStr.data(using: .utf8) {
             if let json = (try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves)) as? [String: AnyObject] {
-                self.postman = PostMan.init(json)
-                PostManRequestManager.shared.postman = postman
-                PostManRequestManager.shared.callAPI(completion: { (response) in
-                    if let json = response as? [String: AnyObject] {
-                        self.showResponse(json)
-                    }
-                    if let jsonArray = response as? [[String: AnyObject]], let json = jsonArray.first {
-                        self.showResponse(json)
-                    }
-                    self.hideHUD
-                    if PostManRequestManager.shared.classes.count > 0 {
-                        DispatchQueue.main.async {
-                            self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "class"), sender: nil)
-                            self.dismissViewController(self)
-                        }
-                    }
-                })
+                self.loadModelWithJSON(json: json)
                 return
             }
         }
         self.hideHUD
     }
-    
+    func loadModelWithJSON(json: Any) {
+        guard let jsonObj = json as? [String: AnyObject] else {return}
+        self.postman = PostMan.init(jsonObj)
+        PostManRequestManager.shared.postman = postman
+        PostManRequestManager.shared.callAPI(completion: { (response) in
+            if let json = response as? [String: AnyObject] {
+                self.showResponse(json)
+            }
+            if let jsonArray = response as? [[String: AnyObject]], let json = jsonArray.first {
+                self.showResponse(json)
+            }
+            self.hideHUD
+            if PostManRequestManager.shared.classes.count > 0 {
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "class"), sender: nil)
+                    self.dismissViewController(self)
+                }
+            }
+        })
+    }
 }

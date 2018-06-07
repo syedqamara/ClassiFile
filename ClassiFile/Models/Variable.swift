@@ -70,7 +70,7 @@ class Variable: NSObject {
     
     var initMethodLineOfThisVariable: String {
         let sortMethodString = """
-        if let jsonVariable = json[\(name)] as? \(getVariableTypeName){
+        if let jsonVariable = json[\"\(name)\"] as? \(getVariableTypeName){
         \(name) = jsonVariable
         }\(kBackSlashN)
         """
@@ -79,7 +79,7 @@ class Variable: NSObject {
     
     var mapMethodLineOfThisVariable: String {
         let sortMethodString = """
-                json[\(name)] = \(name) as AnyObject\(kBackSlashN)
+                json[\"\(name)\"] = \(name) as AnyObject\(kBackSlashN)
         """
         return sortMethodString
     }
@@ -101,9 +101,9 @@ class Variable: NSObject {
     var filterMethod: String {
         let comment = "    ///This Method is used for filter Array of\(nameOfClass) by \(name)\(kBackSlashN)"
         var code = """
-            func filter\(nameOfClass)sBy\(name.uppercased())(_ \(name.uppercased()): \(getVariableTypeName) -> [\(nameOfClass)] {
+            func filter\(nameOfClass)sBy\(name.uppercased())(_ \(name.uppercased()): \(getVariableTypeName)) -> [\(nameOfClass)] {
                 return self.filter({ (object) -> Bool in
-                            return object.\(name) = \(name.uppercased())
+                            return object.\(name) == \(name.uppercased())
                         })
             }\(kBackSlashN)
         """
@@ -113,9 +113,9 @@ class Variable: NSObject {
     var findMethod: String {
         let comment = "///This Method is used find object in Array of\(nameOfClass) by \(name)\(kBackSlashN)"
         var code = """
-            func find\(nameOfClass)sBy\(name.uppercased())(_ \(name.uppercased()): \(getVariableTypeName) -> \(nameOfClass)? {
+            func find\(nameOfClass)sBy\(name.uppercased())(_ \(name.uppercased()): \(getVariableTypeName)) -> \(nameOfClass)? {
                 return self.filter({ (object) -> Bool in
-                            return object.\(name) = \(name.uppercased())
+                            return object.\(name) == \(name.uppercased())
                         }).first
             }
         """
