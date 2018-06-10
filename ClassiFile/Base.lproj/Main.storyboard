@@ -355,6 +355,12 @@
                                                 <segue destination="NYj-gw-2v5" kind="show" identifier="json" id="Ccx-Tn-6Nt"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="SideMenu" id="dLH-RY-4mL" userLabel="SideMenu">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <segue destination="79k-qA-W6w" kind="show" id="5Kg-8q-2RL"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -584,47 +590,13 @@
             </objects>
             <point key="canvasLocation" x="848" y="1074"/>
         </scene>
-        <!--View Controller-->
+        <!--Core DataMOMD CreationVC-->
         <scene sceneID="8RI-2b-AUp">
             <objects>
-                <viewController id="79k-qA-W6w" sceneMemberID="viewController">
+                <viewController id="79k-qA-W6w" customClass="CoreDataMOMDCreationVC" customModule="ClassiFile" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="RPY-Ie-LLg">
                         <rect key="frame" x="0.0" y="0.0" width="702" height="450"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ht1-xX-x2C">
-                                <rect key="frame" x="0.0" y="0.0" width="702" height="450"/>
-                                <clipView key="contentView" drawsBackground="NO" id="6HK-dd-hty">
-                                    <rect key="frame" x="1" y="1" width="700" height="448"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <collectionView id="SgJ-eP-jgG">
-                                            <rect key="frame" x="0.0" y="0.0" width="700" height="158"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="CMZ-5M-QBo">
-                                                <size key="itemSize" width="50" height="50"/>
-                                            </collectionViewFlowLayout>
-                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </collectionView>
-                                    </subviews>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ZQp-Kl-gDj">
-                                    <rect key="frame" x="1" y="144" width="233" height="15"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="7EY-a9-M5G">
-                                    <rect key="frame" x="234" y="1" width="15" height="143"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="ht1-xX-x2C" firstAttribute="leading" secondItem="RPY-Ie-LLg" secondAttribute="leading" id="9et-1s-ghM"/>
-                            <constraint firstAttribute="trailing" secondItem="ht1-xX-x2C" secondAttribute="trailing" id="K6t-Ql-2BV"/>
-                            <constraint firstAttribute="bottom" secondItem="ht1-xX-x2C" secondAttribute="bottom" id="UFO-sA-APe"/>
-                            <constraint firstItem="ht1-xX-x2C" firstAttribute="top" secondItem="RPY-Ie-LLg" secondAttribute="top" id="beB-Qm-ZU5"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="Gci-7f-sX2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1240,7 +1212,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="171" y="831.5"/>
+            <point key="canvasLocation" x="162" y="981"/>
         </scene>
         <!--Classes View Controller-->
         <scene sceneID="fgw-2f-vS8">

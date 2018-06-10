@@ -69,9 +69,15 @@ class Variable: NSObject {
     }
     
     var initMethodLineOfThisVariable: String {
+        var initializingLineString = ""
+        if type != .customClass {
+           initializingLineString = "\(name) = jsonVariable"
+        }else {
+           initializingLineString = "\(name) = \(nameOfClass)(jsonVariable)"
+        }
         let sortMethodString = """
         if let jsonVariable = json[\"\(name)\"] as? \(getVariableTypeName){
-        \(name) = jsonVariable
+        \(initializingLineString)
         }\(kBackSlashN)
         """
         return type == .date ? "" : sortMethodString

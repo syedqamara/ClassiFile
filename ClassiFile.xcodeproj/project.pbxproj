@@ -22,6 +22,8 @@
 		2926755420C34B8F00709C4B /* PostmanJsonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926755320C34B8F00709C4B /* PostmanJsonViewController.swift */; };
 		2943848120C810DC0018CC57 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943848020C810DC0018CC57 /* MainWindowController.swift */; };
 		294384C420C9C1960018CC57 /* JsonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294384C320C9C1960018CC57 /* JsonViewController.swift */; };
+		294384CC20C9CA4E0018CC57 /* CoreDataMOMDCreationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294384CB20C9CA4E0018CC57 /* CoreDataMOMDCreationVC.swift */; };
+		294384CF20C9CF9C0018CC57 /* CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294384CE20C9CF9C0018CC57 /* CoreDataClass.swift */; };
 		295ABFB120C3518E00F599F3 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 295ABFB020C3518E00F599F3 /* MBProgressHUD.m */; };
 		295ABFB320C358CC00F599F3 /* ClassesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295ABFB220C358CB00F599F3 /* ClassesViewController.swift */; };
 		295ABFB620C3896900F599F3 /* ClassCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295ABFB520C3896900F599F3 /* ClassCellView.swift */; };
@@ -76,6 +78,8 @@
 		2926755320C34B8F00709C4B /* PostmanJsonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostmanJsonViewController.swift; sourceTree = "<group>"; };
 		2943848020C810DC0018CC57 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		294384C320C9C1960018CC57 /* JsonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonViewController.swift; sourceTree = "<group>"; };
+		294384CB20C9CA4E0018CC57 /* CoreDataMOMDCreationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMOMDCreationVC.swift; sourceTree = "<group>"; };
+		294384CE20C9CF9C0018CC57 /* CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClass.swift; sourceTree = "<group>"; };
 		295ABFAE20C3518D00F599F3 /* ClassiFile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ClassiFile-Bridging-Header.h"; sourceTree = "<group>"; };
 		295ABFAF20C3518E00F599F3 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		295ABFB020C3518E00F599F3 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 				294384C320C9C1960018CC57 /* JsonViewController.swift */,
 				295ABFB720C389C400F599F3 /* TextEditViewController.swift */,
 				295ABFB920C3979700F599F3 /* BaseViewController.swift */,
+				294384CB20C9CA4E0018CC57 /* CoreDataMOMDCreationVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 				526C477A20681B8C0056B6EE /* Class.swift */,
 				526C477B20681B8C0056B6EE /* Variable.swift */,
 				526C477C20681B8C0056B6EE /* Function.swift */,
+				294384CE20C9CF9C0018CC57 /* CoreDataClass.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -617,8 +623,10 @@
 				2926755120C3474A00709C4B /* Request.swift in Sources */,
 				294384C420C9C1960018CC57 /* JsonViewController.swift in Sources */,
 				526C478320681B8C0056B6EE /* File.swift in Sources */,
+				294384CC20C9CA4E0018CC57 /* CoreDataMOMDCreationVC.swift in Sources */,
 				295ABFB120C3518E00F599F3 /* MBProgressHUD.m in Sources */,
 				526C478420681B8C0056B6EE /* Class.swift in Sources */,
+				294384CF20C9CF9C0018CC57 /* CoreDataClass.swift in Sources */,
 				526C478220681B8C0056B6EE /* Extension.swift in Sources */,
 				2926755420C34B8F00709C4B /* PostmanJsonViewController.swift in Sources */,
 				295ABFB320C358CC00F599F3 /* ClassesViewController.swift in Sources */,

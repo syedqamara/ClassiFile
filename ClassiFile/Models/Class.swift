@@ -17,11 +17,17 @@ enum MarkType: String {
     case filterer = "FilterBy"
 }
 
+
 class Class: File {
     var classID: String = UUID.init().uuidString
     var variables = [Variable]()
+    var parentClass = Class(with: "NSObject")
     
     ///Contains complete code for your class as string
+    init(with cName: String) {
+        super.init()
+        self.name = cName
+    }
     override var completeClass: String? {
         //create class
         var code = """
@@ -31,7 +37,7 @@ class Class: File {
         
         
         """
-        code = code + "class \(name): NSObject {" + kBackSlashN
+        code = code + "class \(name): \(parentClass.name) {" + kBackSlashN
         
         //Declare all variables for this class
         code = code + variableInitialization + kBackSlashN
@@ -66,6 +72,9 @@ class Class: File {
         code = code + "public init(_ json: [String: AnyObject]){\(kBackSlashN)"
         for variable in variables {
             code = code + variable.initMethodLineOfThisVariable
+        }
+        if parentClass.name != "NSObject" {
+            code += kBackSlashN + "super.init(json)"
         }
         code = code + "}" + kBackSlashN
         code.addMark(MarkType.initializer)
