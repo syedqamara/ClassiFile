@@ -54,6 +54,8 @@ class Variable: NSObject {
     var shouldHaveSortMethod = false
     var shouldHaveFindFilterMethod = false
     var variableSecurity = CodeSecurity.publicVar
+    var isArrayType = false
+    
     
     var getVariableTypeName: String {
         var typeString = ""
@@ -71,12 +73,39 @@ class Variable: NSObject {
     var initMethodLineOfThisVariable: String {
         var initializingLineString = ""
         if type != .customClass {
-           initializingLineString = "\(name) = jsonVariable"
+            if isArrayType {
+                initializingLineString = "for jsonObj in jsonArray {\n"
+                initializingLineString += "\(name) = jsonObj\n}"
+            }else {
+                initializingLineString = "\(name) = jsonVariable"
+            }
+           
         }else {
-           initializingLineString = "\(name) = \(nameOfClass)(jsonVariable)"
+            if isArrayType {
+                initializingLineString = "for jsonObj in jsonArray {\n"
+                initializingLineString += "\(name) = \(getVariableTypeName)(jsonObj)\n}"
+            }else {
+                initializingLineString = "\(name) = \(getVariableTypeName)(jsonVariable)"
+            }
         }
+        
+        var initJsonNullCheck = getVariableTypeName
+        if type == .customClass {
+            if isArrayType {
+                initJsonNullCheck = "if let jsonArray = json[\"\(name)\"] as? [[String: AnyObject]] {"
+            }else {
+                initJsonNullCheck = "if let jsonVariable = json[\"\(name)\"] as? [String: AnyObject] {"
+            }
+        }else {
+            if isArrayType {
+                initJsonNullCheck = "if let jsonArray = json[\"\(name)\"] as? [\(getVariableTypeName)] {"
+            }else {
+                initJsonNullCheck = "if let jsonVariable = json[\"\(name)\"] as? \(getVariableTypeName) {"
+            }
+        }
+        
         let sortMethodString = """
-        if let jsonVariable = json[\"\(name)\"] as? \(getVariableTypeName){
+        \(initJsonNullCheck) {
         \(initializingLineString)
         }\(kBackSlashN)
         """
@@ -84,10 +113,39 @@ class Variable: NSObject {
     }
     
     var mapMethodLineOfThisVariable: String {
-        let sortMethodString = """
+        if type != .customClass {
+            if isArrayType {
+                let sortMethodString = """
+                var \(name)Array = [\(getVariableTypeName)]()
+                for obj in \(name) {
+                    \(name)Array.append(obj)
+                }
+                json[\"\(name)\"] = \(name)Array as AnyObject\(kBackSlashN)
+                """
+                return sortMethodString
+            }else {
+                let sortMethodString = """
                 json[\"\(name)\"] = \(name) as AnyObject\(kBackSlashN)
-        """
-        return sortMethodString
+                """
+                return sortMethodString
+            }
+        }else {
+            if isArrayType {
+                let sortMethodString = """
+                var \(name)Array = [\(getVariableTypeName)]()
+                for obj in \(name) {
+                \(name)Array.append(obj.jsonMap)
+                }
+                json[\"\(name)\"] = \(name)Array as AnyObject\(kBackSlashN)
+                """
+                return sortMethodString
+            }else {
+                let sortMethodString = """
+                json[\"\(name)\"] = \(name).jsonMap as AnyObject\(kBackSlashN)
+                """
+                return sortMethodString
+            }
+        }
     }
     
     var sortMethod: String {

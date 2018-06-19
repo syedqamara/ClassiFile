@@ -57,7 +57,7 @@ class PostManRequestManager: NSObject {
         classObj.variables.append(variable)
     }
     func parseJson(json: [String: Any], className: String) -> Class {
-        let newClass = Class()
+        let newClass = Class(with: "NSObject")
         newClass.name = className
         classes.append(newClass)
         for (key, value) in json {

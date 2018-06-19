@@ -25,7 +25,7 @@ import WebKit
 
 class ClassesViewController: NSViewController, EditClassViewControllerDelegate {
     
-    var currentClass = Class()
+    var currentClass = Class(with: "NSObject")
     var isNight = true
     @IBOutlet weak var textView: NSTextView!
     @IBOutlet weak var outlineView: NSOutlineView!

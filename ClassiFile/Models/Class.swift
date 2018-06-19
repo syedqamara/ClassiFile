@@ -21,7 +21,7 @@ enum MarkType: String {
 class Class: File {
     var classID: String = UUID.init().uuidString
     var variables = [Variable]()
-    var parentClass = Class(with: "NSObject")
+    var parentClass: Class?
     
     ///Contains complete code for your class as string
     init(with cName: String) {
@@ -29,6 +29,9 @@ class Class: File {
         self.name = cName
     }
     override var completeClass: String? {
+        if parentClass == nil {
+           parentClass = Class(with: "NSObject")
+        }
         //create class
         var code = """
         //This is Automatic Created Model \(name)
@@ -37,7 +40,7 @@ class Class: File {
         
         
         """
-        code = code + "class \(name): \(parentClass.name) {" + kBackSlashN
+        code = code + "class \(name): \(parentClass!.name) {" + kBackSlashN
         
         //Declare all variables for this class
         code = code + variableInitialization + kBackSlashN
@@ -73,7 +76,7 @@ class Class: File {
         for variable in variables {
             code = code + variable.initMethodLineOfThisVariable
         }
-        if parentClass.name != "NSObject" {
+        if parentClass!.name != "NSObject" {
             code += kBackSlashN + "super.init(json)"
         }
         code = code + "}" + kBackSlashN
@@ -175,6 +178,20 @@ class Class: File {
 //        mutableString.append("".addColofullMark(.initializer))
         return mutableString
     }
+    
+    var languageStaticKeyWords: [String] {
+        var keyWords = [String]()
+        keyWords = ["var","if","let","for","else","class","func","private","public","fileprivate","init","return","break","continue","self", "Any", "?", "as"]
+        return keyWords
+    }
+    var languageDataTypeKeyWords: [String] {
+        var keyWords = [String]()
+        keyWords = ["String","Int","Bool","Float","Double","Void","AnyObject"]
+        return keyWords
+    }
+    
+    
+    
 }
 
 

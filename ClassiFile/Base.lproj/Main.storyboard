@@ -352,7 +352,7 @@
                                         <menuItem title="JSON" id="sbg-yU-qSt" userLabel="JSON">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <segue destination="NYj-gw-2v5" kind="show" identifier="json" id="Ccx-Tn-6Nt"/>
+                                                <segue destination="KJB-le-f1d" kind="show" id="rtF-P7-PKS"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="SideMenu" id="dLH-RY-4mL" userLabel="SideMenu">
@@ -606,7 +606,7 @@
         <!--Paste Your JSON-->
         <scene sceneID="0Jd-BO-t7V">
             <objects>
-                <viewController title="Paste Your JSON" storyboardIdentifier="PostmanJsonViewController" id="KJB-le-f1d" customClass="JsonViewController" customModule="ClassiFile" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Paste Your JSON" storyboardIdentifier="JsonViewController" id="KJB-le-f1d" customClass="JsonViewController" customModule="ClassiFile" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="N3x-da-z0g">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -662,6 +662,7 @@
                     </view>
                     <connections>
                         <outlet property="textView" destination="WvL-TI-160" id="iH6-yB-3vW"/>
+                        <segue destination="HpO-sN-nsr" kind="show" identifier="class" id="wnQ-4k-U7O"/>
                     </connections>
                 </viewController>
                 <customObject id="Pdw-Ad-eGM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1483,7 +1484,7 @@
         <image name="NSAddTemplate" width="11" height="11"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="wnQ-4k-U7O"/>
         <segue reference="cq2-FE-JQM"/>
-        <segue reference="Je4-Sg-1Uw"/>
     </inferredMetricsTieBreakers>
 </document>

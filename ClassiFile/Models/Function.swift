@@ -22,8 +22,6 @@ class Function: NSObject {
         code += "}" + kBackSlashN
         return ""
     }
-    
-    
 }
 
 class BuiltInFunction: Function {

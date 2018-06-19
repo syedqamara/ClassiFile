@@ -23,5 +23,18 @@ class JsonViewController: PostmanJsonViewController {
                 PostManRequestManager.shared.createClassWithJson(json: jsonArray)
             }
         }
+        self.hideHUD
+        if PostManRequestManager.shared.classes.count > 0 {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "class"), sender: nil)
+//                self.dismissViewController(self)
+            }
+        }
+    }
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier?._rawValue == "class" {
+            let destVC = segue.destinationController as! ClassesViewController
+            destVC.feeds = PostManRequestManager.shared.classes
+        }
     }
 }

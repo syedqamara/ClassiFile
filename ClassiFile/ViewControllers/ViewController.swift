@@ -31,7 +31,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     var isEditMode = false
     var delegate: EditClassViewControllerDelegate?
     
-    var classObj = Class()
+    var classObj = Class(with: "NSObject")
     var resetVariableFields: Void {
         nameTextField.stringValue = ""
         sortCheckBox.state = NSControl.StateValue.off
