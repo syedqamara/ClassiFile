@@ -154,34 +154,43 @@ class Class: File {
     
     var colorfullCompleteClass: NSMutableAttributedString {
         let mutableString = NSMutableAttributedString()
-        mutableString.append(("//This is Automatic Created Model \(name)" + kBackSlashN).commentWord)
-        mutableString.append("import ".purpleKeyWord)
-        mutableString.append("Foundation\n\n".normalWord)
-        mutableString.append("class ".purpleKeyWord)
-        mutableString.append("\(name): ".normalWord)
-        mutableString.append("NSObject".blueKeyWord)
-        mutableString.append(" {\n".normalWord)
-        
-        mutableString.append("//Declare all variables for this class\n".commentWord)
-        mutableString.append(colorFullVariableInitialization)
-        mutableString.append("\n".normalWord)
-        
-        mutableString.append("//Declare and implement init(json: [String: AnyObject]) for this class".commentWord)
-        mutableString.append(colorFullCompleteInitMethodCode)
-        mutableString.append("\n".normalWord)
-        
-        mutableString.append("//Declare and implement map()-> [String: AnyObject]".commentWord)
-        mutableString.append(colorFullCompleteMappingMethod)
-        mutableString.append("\n".normalWord)
-        
-        mutableString.append("\n}".normalWord)
-//        mutableString.append("".addColofullMark(.initializer))
+        if let classCode = completeClass {
+            mutableString.append(classCode.normalWord)
+        }
+        if let classCode = completeClass {
+            for keyword in languageStaticKeyWords {
+                let ranges = classCode.ranges(of: keyword)
+                for range in ranges {
+                    let attr: [NSAttributedStringKey: Any] = [NSAttributedStringKey.foregroundColor: NSColor.purpleCodeColor, NSAttributedStringKey.font: NSFont.systemFont(ofSize: 16, weight: .regular)]
+                    let newRange = NSRange.init(range, in: classCode)
+                    mutableString.addAttributes(attr, range: newRange)
+                }
+            }
+            for keyword in languageDataTypeKeyWords {
+                let ranges = classCode.ranges(of: keyword)
+                for range in ranges {
+                    let attr: [NSAttributedStringKey: Any] = [NSAttributedStringKey.foregroundColor: NSColor.blueCodeColor, NSAttributedStringKey.font: NSFont.systemFont(ofSize: 16, weight: .regular)]
+                    let newRange = NSRange.init(range, in: classCode)
+                    mutableString.addAttributes(attr, range: newRange)
+                }
+            }
+            for variable in variables {
+                if variable.type == .customClass {
+                    let ranges = classCode.ranges(of: variable.getVariableTypeName)
+                    for range in ranges {
+                        let attr: [NSAttributedStringKey: Any] = [NSAttributedStringKey.foregroundColor: NSColor.userdefineCodeColor, NSAttributedStringKey.font: NSFont.systemFont(ofSize: 16, weight: .regular)]
+                        let newRange = NSRange.init(range, in: classCode)
+                        mutableString.addAttributes(attr, range: newRange)
+                    }
+                }
+            }
+        }
         return mutableString
     }
     
     var languageStaticKeyWords: [String] {
         var keyWords = [String]()
-        keyWords = ["var","if","let","for","else","class","func","private","public","fileprivate","init","return","break","continue","self", "Any", "?", "as"]
+        keyWords = ["var ","if ","let ","for ","else ","class ","func ","private ","public ","fileprivate ","init ","return ","break ","continue ","self ", " Any ", "?", " as ", "as?"]
         return keyWords
     }
     var languageDataTypeKeyWords: [String] {

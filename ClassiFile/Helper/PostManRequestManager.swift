@@ -47,9 +47,11 @@ class PostManRequestManager: NSObject {
         _ = parseJson(json: json, className: "MasterClass")
         print("Successfully Created Class")
     }
-    func addClassVariable(key: String, classObj: Class) {
+    func addClassVariable(key: String, classObj: Class, isArray: Bool = false) {
         let variable = Variable()
+        variable.isArrayType = isArray
         variable.name = "\(key.lowercased())obj"
+        variable.keyName = key
         variable.type = .customClass
         variable.customTypeName = key.uppercased()
         variable.shouldHaveSortMethod = false
@@ -62,6 +64,7 @@ class PostManRequestManager: NSObject {
         classes.append(newClass)
         for (key, value) in json {
             var jsonValue = value
+            var variableIsArray = false
             if let isJson = value as? [String: Any] {
                 let returnedClass = parseJson(json: isJson, className: key.uppercased())
                 addClassVariable(key: key, classObj: newClass)
@@ -70,10 +73,11 @@ class PostManRequestManager: NSObject {
             if let isArray = value as? [Any] {
                 if let isJson = isArray.first as? [String: Any] {
                     let returnedClass = parseJson(json: isJson, className: key.uppercased())
-                    addClassVariable(key: key, classObj: newClass)
+                    addClassVariable(key: key, classObj: newClass, isArray: true)
                     continue
                 }else {
                     jsonValue = isArray.first
+                    variableIsArray = true
                 }
             }
             var type = VariableType.string
@@ -99,6 +103,8 @@ class PostManRequestManager: NSObject {
             }
             
             newClass.addVariable(name: key, variableType: type, shouldHaveSort: false, shouldHaveFilter: true)
+            newClass.variables[newClass.variables.count-1].isArrayType = variableIsArray
+            newClass.variables[newClass.variables.count-1].keyName = key
         }
         return newClass
     }

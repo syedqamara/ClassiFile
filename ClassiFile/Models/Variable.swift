@@ -47,7 +47,12 @@ let kBackSlashN = "\n"
 class Variable: NSObject {
     var variableID: String = UUID.init().uuidString
     var nameOfClass: String = ""
-    var name: String = ""
+    var name: String = "" {
+        didSet {
+            keyName = name
+        }
+    }
+    var keyName = ""
     var type: VariableType = .int
     var customTypeName = ""
     
@@ -67,7 +72,12 @@ class Variable: NSObject {
         return typeString
     }
     var declareVariable: String {
-        return "    \(variableSecurity.rawValue) var \(name): \(getVariableTypeName)?\(kBackSlashN)"
+        if isArrayType {
+            return "    \(variableSecurity.rawValue) var \(name) = [\(getVariableTypeName)]())\(kBackSlashN)"
+        }else {
+            return "    \(variableSecurity.rawValue) var \(name): \(getVariableTypeName)?\(kBackSlashN)"
+        }
+        
     }
     
     var initMethodLineOfThisVariable: String {
@@ -92,15 +102,15 @@ class Variable: NSObject {
         var initJsonNullCheck = getVariableTypeName
         if type == .customClass {
             if isArrayType {
-                initJsonNullCheck = "if let jsonArray = json[\"\(name)\"] as? [[String: AnyObject]] {"
+                initJsonNullCheck = "if let jsonArray = json[\"\(keyName)\"] as? [[String: AnyObject]] {"
             }else {
-                initJsonNullCheck = "if let jsonVariable = json[\"\(name)\"] as? [String: AnyObject] {"
+                initJsonNullCheck = "if let jsonVariable = json[\"\(keyName)\"] as? [String: AnyObject] {"
             }
         }else {
             if isArrayType {
-                initJsonNullCheck = "if let jsonArray = json[\"\(name)\"] as? [\(getVariableTypeName)] {"
+                initJsonNullCheck = "if let jsonArray = json[\"\(keyName)\"] as? [\(getVariableTypeName)] {"
             }else {
-                initJsonNullCheck = "if let jsonVariable = json[\"\(name)\"] as? \(getVariableTypeName) {"
+                initJsonNullCheck = "if let jsonVariable = json[\"\(keyName)\"] as? \(getVariableTypeName) {"
             }
         }
         
@@ -120,28 +130,28 @@ class Variable: NSObject {
                 for obj in \(name) {
                     \(name)Array.append(obj)
                 }
-                json[\"\(name)\"] = \(name)Array as AnyObject\(kBackSlashN)
+                json[\"\(keyName)\"] = \(name)Array as AnyObject\(kBackSlashN)
                 """
                 return sortMethodString
             }else {
                 let sortMethodString = """
-                json[\"\(name)\"] = \(name) as AnyObject\(kBackSlashN)
+                json[\"\(keyName)\"] = \(name) as AnyObject\(kBackSlashN)
                 """
                 return sortMethodString
             }
         }else {
             if isArrayType {
                 let sortMethodString = """
-                var \(name)Array = [\(getVariableTypeName)]()
+                var \(name)Array = [AnyObject]()
                 for obj in \(name) {
                 \(name)Array.append(obj.jsonMap)
                 }
-                json[\"\(name)\"] = \(name)Array as AnyObject\(kBackSlashN)
+                json[\"\(keyName)\"] = \(name)Array as AnyObject\(kBackSlashN)
                 """
                 return sortMethodString
             }else {
                 let sortMethodString = """
-                json[\"\(name)\"] = \(name).jsonMap as AnyObject\(kBackSlashN)
+                json[\"\(keyName)\"] = \(name).jsonMap as AnyObject\(kBackSlashN)
                 """
                 return sortMethodString
             }
