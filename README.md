@@ -6,7 +6,7 @@ An Open Source Mac app to created Automated Swift Classes + Extensions for your 
 ## Download App
 To download this app click on the link below.
 
-ClassiFile [Download📥](https://drive.google.com/file/d/1SLsNjmOjz9kSC7gyyxwlQEZC-_sUqPkF/view?usp=sharing)
+ClassiFile [Download📥](https://drive.google.com/open?id=1VRzDmk3Fw_HIqyg6VfnTmBtRSOUN1lyi)
 
 
 
