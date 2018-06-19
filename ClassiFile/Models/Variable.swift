@@ -73,7 +73,7 @@ class Variable: NSObject {
     }
     var declareVariable: String {
         if isArrayType {
-            return "    \(variableSecurity.rawValue) var \(name) = [\(getVariableTypeName)]())\(kBackSlashN)"
+            return "    \(variableSecurity.rawValue) var \(name) = [\(getVariableTypeName)]()\(kBackSlashN)"
         }else {
             return "    \(variableSecurity.rawValue) var \(name): \(getVariableTypeName)?\(kBackSlashN)"
         }
@@ -84,8 +84,7 @@ class Variable: NSObject {
         var initializingLineString = ""
         if type != .customClass {
             if isArrayType {
-                initializingLineString = "for jsonObj in jsonArray {\n"
-                initializingLineString += "\(name) = jsonObj\n}"
+                initializingLineString = "\(name) = jsonArray"
             }else {
                 initializingLineString = "\(name) = jsonVariable"
             }
@@ -115,7 +114,7 @@ class Variable: NSObject {
         }
         
         let sortMethodString = """
-        \(initJsonNullCheck) {
+        \(initJsonNullCheck)
         \(initializingLineString)
         }\(kBackSlashN)
         """

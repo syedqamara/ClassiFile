@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		21F3BBB87F51CCF40D0DBC7C /* Pods_ClassiFileTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E743A0B2DB51662D303E12FE /* Pods_ClassiFileTests.framework */; };
 		27ED9F0E09DAF0D962E60AEF /* Pods_ClassiFileUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6F8DEFF83A0F9B15F05884 /* Pods_ClassiFileUITests.framework */; };
+		2922F2E620D9982300CCFB1C /* XMLTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2922F2E520D9982300CCFB1C /* XMLTag.swift */; };
 		2926753F20C3473600709C4B /* PostManRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926753E20C3473600709C4B /* PostManRequestManager.swift */; };
 		2926754120C3473F00709C4B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926754020C3473F00709C4B /* Extensions.swift */; };
 		2926754A20C3474A00709C4B /* PostMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926754220C3474900709C4B /* PostMan.swift */; };
@@ -65,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2922F2E520D9982300CCFB1C /* XMLTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLTag.swift; sourceTree = "<group>"; };
 		2926753E20C3473600709C4B /* PostManRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostManRequestManager.swift; sourceTree = "<group>"; };
 		2926754020C3473F00709C4B /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2926754220C3474900709C4B /* PostMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMan.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				526C477B20681B8C0056B6EE /* Variable.swift */,
 				526C477C20681B8C0056B6EE /* Function.swift */,
 				294384CE20C9CF9C0018CC57 /* CoreDataClass.swift */,
+				2922F2E520D9982300CCFB1C /* XMLTag.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -625,6 +628,7 @@
 				526C478320681B8C0056B6EE /* File.swift in Sources */,
 				294384CC20C9CA4E0018CC57 /* CoreDataMOMDCreationVC.swift in Sources */,
 				295ABFB120C3518E00F599F3 /* MBProgressHUD.m in Sources */,
+				2922F2E620D9982300CCFB1C /* XMLTag.swift in Sources */,
 				526C478420681B8C0056B6EE /* Class.swift in Sources */,
 				294384CF20C9CF9C0018CC57 /* CoreDataClass.swift in Sources */,
 				526C478220681B8C0056B6EE /* Extension.swift in Sources */,
