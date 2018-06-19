@@ -1,4 +1,4 @@
-# ClassiFile(1.0) <img src="classifileicon.png" alt="drawing" width="35" height="35" />
+# ClassiFile(1.1) <img src="classifileicon.png" alt="drawing" width="35" height="35" />
 
 An Open Source Mac app to created Automated Swift Classes + Extensions for your model
 
@@ -7,6 +7,13 @@ An Open Source Mac app to created Automated Swift Classes + Extensions for your 
 To download this app click on the link below.
 
 ClassiFile [Download📥](https://drive.google.com/file/d/1SLsNjmOjz9kSC7gyyxwlQEZC-_sUqPkF/view?usp=sharing)
+
+
+
+## Whats New In 1.1
+Version 1.1 bring `JSON` to `Model` as well as `PostMan` request json to `Model`.
+When you paste your postman request json in the text area. It invokes you API and fetch the response and create the model with respect to your API response.
+
 
 ## MacApp Screenshots.
 
@@ -24,6 +31,19 @@ When ever you add a variable you can see it in a list for with variable name and
 Finaly click on Save button to successfully save you class.
 
 ![Logo](./screenshot1.png)
+
+### Choose NEW Options
+Select PosmanJSON or JSON
+![Logo](./screenshot5.png)
+
+### Choose Postman JSON
+Select and paste your postman json in text Area.
+![Logo](./screenshot4.png)
+
+### Choose JSON
+Select and paste your actual json in text Area.
+![Logo](./screenshot4.png)
+
 
 ## In-App Models
 There are few models we have defined to draw dynamic code.
