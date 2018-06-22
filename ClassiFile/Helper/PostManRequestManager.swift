@@ -143,6 +143,12 @@ class PostManRequestManager: NSObject {
             }
         }
     }
+    func isSameClass(_ classObj: Class) -> Class? {
+        let filterClass = self.classes.filter { (classObject) -> Bool in
+            return classObject.variables.haveSameVariables(classObj) && classObj.classID != classObject.classID
+        }
+        return filterClass.first
+    }
     func showErrorDialogIn(title: String, message: String) {
         let alert = NSAlert()
         alert.messageText = title

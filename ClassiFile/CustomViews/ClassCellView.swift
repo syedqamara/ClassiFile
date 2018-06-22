@@ -9,7 +9,7 @@
 import Cocoa
 
 class ClassCellView: NSTableCellView {
-
+    @IBOutlet weak var warningButton: VariableButton!
     @IBOutlet weak var editButton: NSButton!
     @IBOutlet weak var classEditButton: NSButton!
     

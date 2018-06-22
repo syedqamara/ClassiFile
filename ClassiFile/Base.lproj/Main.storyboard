@@ -1265,22 +1265,35 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kPa-7S-zX1">
-                                                                            <rect key="frame" x="120" y="8" width="94" height="25"/>
+                                                                            <rect key="frame" x="120" y="8" width="76" height="25"/>
                                                                             <buttonCell key="cell" type="squareTextured" title="Change Name" bezelStyle="texturedSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ip9-q0-ZXD">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                <font key="font" metaFont="system"/>
+                                                                                <font key="font" metaFont="system" size="10"/>
                                                                             </buttonCell>
                                                                         </button>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nCG-BN-K0d">
-                                                                            <rect key="frame" x="224" y="8" width="68" height="25"/>
+                                                                            <rect key="frame" x="206" y="8" width="56" height="25"/>
                                                                             <buttonCell key="cell" type="squareTextured" title="Edit Class" bezelStyle="texturedSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QnD-ei-zQO">
+                                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                <font key="font" metaFont="system" size="10"/>
+                                                                            </buttonCell>
+                                                                        </button>
+                                                                        <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DBS-lA-AiX" customClass="VariableButton" customModule="ClassiFile" customModuleProvider="target">
+                                                                            <rect key="frame" x="304" y="5" width="30" height="30"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="30" id="Ngr-xW-3z9"/>
+                                                                                <constraint firstAttribute="width" constant="30" id="vRs-Wz-6Os"/>
+                                                                            </constraints>
+                                                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Image" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="geP-th-B3O">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="system"/>
                                                                             </buttonCell>
                                                                         </button>
                                                                     </subviews>
                                                                     <constraints>
+                                                                        <constraint firstItem="DBS-lA-AiX" firstAttribute="centerY" secondItem="qOB-pz-2GN" secondAttribute="centerY" id="73d-Vf-vk8"/>
                                                                         <constraint firstItem="kPa-7S-zX1" firstAttribute="centerY" secondItem="Q5x-4u-YXd" secondAttribute="centerY" id="GOh-jd-C2I"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="DBS-lA-AiX" secondAttribute="trailing" constant="5" id="Ml7-Bb-LWu"/>
                                                                         <constraint firstItem="kPa-7S-zX1" firstAttribute="leading" secondItem="Q5x-4u-YXd" secondAttribute="trailing" constant="8" id="R8f-mm-8JM"/>
                                                                         <constraint firstItem="Q5x-4u-YXd" firstAttribute="centerY" secondItem="qOB-pz-2GN" secondAttribute="centerY" id="X1d-ld-HJA"/>
                                                                         <constraint firstItem="Q5x-4u-YXd" firstAttribute="leading" secondItem="qOB-pz-2GN" secondAttribute="leading" constant="2" id="agx-H9-uOA"/>
@@ -1291,6 +1304,7 @@
                                                                         <outlet property="classEditButton" destination="nCG-BN-K0d" id="tgj-KM-8vI"/>
                                                                         <outlet property="editButton" destination="kPa-7S-zX1" id="CSh-xA-rRt"/>
                                                                         <outlet property="textField" destination="Q5x-4u-YXd" id="mcx-cf-n32"/>
+                                                                        <outlet property="warningButton" destination="DBS-lA-AiX" id="abk-Ys-zZn"/>
                                                                     </connections>
                                                                 </tableCellView>
                                                                 <tableCellView identifier="FeedItemCell" id="qqe-L9-88s" customClass="VariableCell" customModule="ClassiFile" customModuleProvider="target">
@@ -1306,10 +1320,10 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BkX-vt-bgn" customClass="VariableButton" customModule="ClassiFile" customModuleProvider="target">
-                                                                            <rect key="frame" x="122" y="8" width="94" height="25"/>
+                                                                            <rect key="frame" x="122" y="8" width="76" height="25"/>
                                                                             <buttonCell key="cell" type="squareTextured" title="Change Name" bezelStyle="texturedSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9Xx-6G-cyO">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                <font key="font" metaFont="system"/>
+                                                                                <font key="font" metaFont="system" size="10"/>
                                                                             </buttonCell>
                                                                         </button>
                                                                     </subviews>
@@ -1476,15 +1490,16 @@
                 </viewController>
                 <customObject id="8Br-sg-oSs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="324" y="1692.5"/>
+            <point key="canvasLocation" x="323.5" y="1692.5"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Image" width="192" height="192"/>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wnQ-4k-U7O"/>
-        <segue reference="cq2-FE-JQM"/>
+        <segue reference="ffP-s8-xHs"/>
     </inferredMetricsTieBreakers>
 </document>

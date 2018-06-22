@@ -60,6 +60,7 @@ extension Array where Element: Class {
             }
         }
     }
+    
 }
 
 extension Array where Element: Variable {
@@ -93,6 +94,23 @@ extension Array where Element: Variable {
             index += 1
         }
         return -1
+    }
+    func haveSameVariables(_ classObj: Class) -> Bool {
+        var isSame = true
+        for variable in self {
+            var isSameVariable = false
+            for cVariable in classObj.variables {
+                if cVariable.isSameVariable(variable) {
+                    isSameVariable = true
+                    break
+                }
+            }
+            if isSameVariable == false {
+                isSame = false
+                break
+            }
+        }
+        return isSame
     }
 }
 /*

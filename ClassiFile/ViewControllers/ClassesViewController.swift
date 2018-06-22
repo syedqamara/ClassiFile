@@ -23,7 +23,7 @@
 import Cocoa
 import WebKit
 
-class ClassesViewController: NSViewController, EditClassViewControllerDelegate {
+class ClassesViewController: BaseViewController, EditClassViewControllerDelegate {
     
     var currentClass = Class(with: "NSObject")
     var isNight = true
@@ -178,10 +178,12 @@ extension ClassesViewController: NSOutlineViewDelegate, TextEditVCDelegate {
                     }else {
                         button?.isHidden = true
                     }
-//                    button?.tag = tableColumn.r
+                    cell.warningButton.isHidden = PostManRequestManager.shared.isSameClass(feed) == nil
                     button?.action = #selector(ClassesViewController.didTapEditButtonAtIndex(button:))
                     cell.classEditButton.tag = index
+                    cell.warningButton.tag = index
                     cell.classEditButton.action = #selector(ClassesViewController.didTapEditClassButton(button:))
+                    cell.warningButton.action = #selector(ClassesViewController.didTapWarningButton(button:))
                 }
             }
         } else if let feedItem = item as? Variable {
@@ -212,11 +214,31 @@ extension ClassesViewController: NSOutlineViewDelegate, TextEditVCDelegate {
         //More code here
         return view
     }
+    func outlineView(_ outlineView: NSOutlineView, heightOfRowByItem item: Any) -> CGFloat {
+        return 40
+    }
     @objc func didTapEditButtonAtIndex(button: NSButton) {
         self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "edit"), sender: button)
     }
     @objc func didTapEditClassButton(button: NSButton) {
         self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "editClass"), sender: button)
+    }
+    @objc func didTapWarningButton(button: VariableButton) {
+        let index = button.tag
+        let selectedClass = PostManRequestManager.shared.classes[index]
+        if let classObj = PostManRequestManager.shared.isSameClass(selectedClass) {
+            self.showAlert("warning", "Your class \(selectedClass.name) is same class of name \(classObj.name).\n Are you want to merge them in a single class with name \(selectedClass.name)",["YES", "NO"], .warning, completion: {index in
+                if index == 1000 {
+                    let classIndex = PostManRequestManager.shared.classes.findIndex(classObj)
+                    PostManRequestManager.shared.classes.remove(at: classIndex)
+                    self.feeds = PostManRequestManager.shared.classes
+                    DispatchQueue.main.async {
+                        self.outlineView.reloadData()
+                    }
+                }
+            })
+        }
+        
     }
     @objc func didTapVariableEditButtonAtIndex(button: NSButton) {
         self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "edit"), sender: button)

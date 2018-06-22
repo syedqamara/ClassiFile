@@ -195,6 +195,20 @@ class Variable: NSObject {
         code = comment + code + kBackSlashN
         return code
     }
+    //Mark: - Compare
+    func isSameVariable(_ variable: Variable) -> Bool{
+        var isSame = true
+        if variable.name != self.name {
+            isSame = false
+        }
+        if variable.getVariableTypeName != self.getVariableTypeName {
+            isSame = false
+        }
+        if variable.isArrayType != variable.isArrayType {
+            isSame = false
+        }
+        return isSame
+    }
     
     ///Mark: - Colofull Code Conversion
     var getAttributedVariableTypeName: NSAttributedString {
