@@ -178,9 +178,9 @@ extension ClassesViewController: NSOutlineViewDelegate, TextEditVCDelegate {
                     }else {
                         button?.isHidden = true
                     }
-                    let haveAnyEqualClass = PostManRequestManager.shared.isSameClass(feed).count == 0
-                    let didConformsToInheritance = PostManRequestManager.shared.isConformToInheritance(feed).count < 3
-                    let shouldHideWarningButton = (haveAnyEqualClass) && (didConformsToInheritance)
+                    let haveAnyEqualClass = PostManRequestManager.shared.isSameClass(feed).count > 0
+                    let didConformsToInheritance = PostManRequestManager.shared.isConformToInheritance(feed).count > 0
+                    let shouldHideWarningButton = (!haveAnyEqualClass) && (!didConformsToInheritance)
                     
                     if haveAnyEqualClass {
                         cell.warningButton.image = #imageLiteral(resourceName: "Image")
@@ -238,7 +238,7 @@ extension ClassesViewController: NSOutlineViewDelegate, TextEditVCDelegate {
         let selectedClass = PostManRequestManager.shared.classes[index]
         
         let haveAnyEqualClass = PostManRequestManager.shared.isSameClass(selectedClass).count > 0
-        let didConformsToInheritance = PostManRequestManager.shared.isConformToInheritance(selectedClass).count >= 3
+        let didConformsToInheritance = PostManRequestManager.shared.isConformToInheritance(selectedClass).count > 0
         if haveAnyEqualClass {
             showAlertForEqualClassWith(selectedClass)
         }else if didConformsToInheritance {

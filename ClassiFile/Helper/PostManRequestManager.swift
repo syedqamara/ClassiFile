@@ -157,7 +157,7 @@ class PostManRequestManager: NSObject {
     }
     func isConformToInheritance(_ classObj: Class) -> [Class] {
         let filterClass = self.classes.filter { (classObject) -> Bool in
-            return classObject.variables.matchingVariableCounts(classObj) > 3 && classObj.classID != classObject.classID
+            return classObject.variables.matchingVariableCounts(classObj) >= 3 && classObj.classID != classObject.classID
         }
         return filterClass.filter({$0.classID != classObj.classID})
     }
