@@ -60,6 +60,10 @@ extension Array where Element: Class {
             }
         }
     }
+    var className: String {
+        let classNames = self.map { $0.name }
+        return classNames.joined(separator: ", ")
+    }
     
 }
 
@@ -107,6 +111,41 @@ extension Array where Element: Variable {
             }
             if isSameVariable == false {
                 isSame = false
+                break
+            }
+        }
+        return isSame
+    }
+    
+    func matchingVariableCounts(_ classObj: Class) -> Int {
+        var count = 0
+        for variable in self {
+            for cVariable in classObj.variables {
+                if cVariable.isSameVariable(variable) {
+                    count += 1
+                    break
+                }
+            }
+        }
+        return count
+    }
+    func getMatchingVariables(classObj: Class) -> [Variable] {
+        var variables = [Variable]()
+        for variable in self {
+            for cVariable in classObj.variables {
+                if cVariable.isSameVariable(variable) {
+                    variables.append(cVariable)
+                    break
+                }
+            }
+        }
+        return variables
+    }
+    func haveVariable(_ variable: Variable) -> Bool {
+        var isSame = false
+        for cVariable in self {
+            if cVariable.isSameVariable(variable) {
+                isSame = true
                 break
             }
         }

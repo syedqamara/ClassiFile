@@ -143,11 +143,49 @@ class PostManRequestManager: NSObject {
             }
         }
     }
-    func isSameClass(_ classObj: Class) -> Class? {
+    func isSameClass(_ classObj: Class) -> [Class] {
         let filterClass = self.classes.filter { (classObject) -> Bool in
             return classObject.variables.haveSameVariables(classObj) && classObj.classID != classObject.classID
         }
-        return filterClass.first
+        return filterClass.filter({$0.classID != classObj.classID})
+    }
+    func haveClass(_ classObj: Class) -> [Class] {
+        let filterClass = self.classes.filter { (classObject) -> Bool in
+            return classObject.variables.haveSameVariables(classObj)
+        }
+        return filterClass.filter({$0.isBaseClass})
+    }
+    func isConformToInheritance(_ classObj: Class) -> [Class] {
+        let filterClass = self.classes.filter { (classObject) -> Bool in
+            return classObject.variables.matchingVariableCounts(classObj) > 3 && classObj.classID != classObject.classID
+        }
+        return filterClass.filter({$0.classID != classObj.classID})
+    }
+    func createBaseClass(for classObj: Class) {
+        if let baseClass = getBaseClass(of: classObj), let index = classes.index(of: classObj) {
+            baseClass.name = "Base\(classObj.name)"
+            let remainingVariablesAfterBaseClassGeneration = classObj.variables.filter({ (variable) -> Bool in
+                return !baseClass.variables.haveVariable(variable)
+            })
+            self.classes[index].variables = remainingVariablesAfterBaseClassGeneration
+            if haveClass(baseClass).count == 0 {
+                self.classes.append(baseClass)
+                self.classes[index].parentClass = baseClass
+            }else {
+                self.classes[index].parentClass = haveClass(baseClass).first
+            }
+        }
+    }
+    func getBaseClass(of classObj: Class) -> Class? {
+        var baseClass: Class?
+        let matchedClasses = isConformToInheritance(classObj)
+        if let matchedClass = matchedClasses.first {
+            let commonVariables = matchedClass.variables.getMatchingVariables(classObj: classObj)
+            let newClass = Class(with: "NSObject")
+            newClass.variables = commonVariables
+            baseClass = newClass
+        }
+        return baseClass
     }
     func showErrorDialogIn(title: String, message: String) {
         let alert = NSAlert()

@@ -22,7 +22,7 @@ class Class: File {
     var classID: String = UUID.init().uuidString
     var variables = [Variable]()
     var parentClass: Class?
-    
+    var isBaseClass = false
     ///Contains complete code for your class as string
     init(with cName: String) {
         super.init()

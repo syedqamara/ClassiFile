@@ -178,7 +178,17 @@ extension ClassesViewController: NSOutlineViewDelegate, TextEditVCDelegate {
                     }else {
                         button?.isHidden = true
                     }
-                    cell.warningButton.isHidden = PostManRequestManager.shared.isSameClass(feed) == nil
+                    let haveAnyEqualClass = PostManRequestManager.shared.isSameClass(feed).count == 0
+                    let didConformsToInheritance = PostManRequestManager.shared.isConformToInheritance(feed).count < 3
+                    let shouldHideWarningButton = (haveAnyEqualClass) && (didConformsToInheritance)
+                    
+                    if haveAnyEqualClass {
+                        cell.warningButton.image = #imageLiteral(resourceName: "Image")
+                    }
+                    else if didConformsToInheritance {
+                        cell.warningButton.image = #imageLiteral(resourceName: "inheritance")
+                    }
+                    cell.warningButton.isHidden = shouldHideWarningButton
                     button?.action = #selector(ClassesViewController.didTapEditButtonAtIndex(button:))
                     cell.classEditButton.tag = index
                     cell.warningButton.tag = index
@@ -226,19 +236,52 @@ extension ClassesViewController: NSOutlineViewDelegate, TextEditVCDelegate {
     @objc func didTapWarningButton(button: VariableButton) {
         let index = button.tag
         let selectedClass = PostManRequestManager.shared.classes[index]
-        if let classObj = PostManRequestManager.shared.isSameClass(selectedClass) {
-            self.showAlert("warning", "Your class \(selectedClass.name) is same class of name \(classObj.name).\n Are you want to merge them in a single class with name \(selectedClass.name)",["YES", "NO"], .warning, completion: {index in
-                if index == 1000 {
-                    let classIndex = PostManRequestManager.shared.classes.findIndex(classObj)
-                    PostManRequestManager.shared.classes.remove(at: classIndex)
-                    self.feeds = PostManRequestManager.shared.classes
-                    DispatchQueue.main.async {
-                        self.outlineView.reloadData()
-                    }
-                }
-            })
+        
+        let haveAnyEqualClass = PostManRequestManager.shared.isSameClass(selectedClass).count > 0
+        let didConformsToInheritance = PostManRequestManager.shared.isConformToInheritance(selectedClass).count >= 3
+        if haveAnyEqualClass {
+            showAlertForEqualClassWith(selectedClass)
+        }else if didConformsToInheritance {
+            showAlertForBaseClassWith(selectedClass)
         }
         
+    }
+    func showAlertForEqualClassWith(_ selectedClass: Class) {
+        let matchedClasses = PostManRequestManager.shared.isSameClass(selectedClass)
+        self.showAlert("Warning", "Your class \(selectedClass.name) is same class of name \(matchedClasses.className).\n Are you want to merge them in a single class with name \(selectedClass.name)",["YES", "NO"], .warning, completion: {index in
+            if index == 1000 {
+                for mClass in matchedClasses {
+                    let classIndex = PostManRequestManager.shared.classes.findIndex(mClass)
+                    PostManRequestManager.shared.classes.remove(at: classIndex)
+                }
+                self.feeds = PostManRequestManager.shared.classes
+                DispatchQueue.main.async {
+                    self.outlineView.reloadData()
+                }
+            }
+        })
+    }
+    
+    func showAlertForBaseClassWith(_ selectedClass: Class) {
+        let matchedClasses = PostManRequestManager.shared.isConformToInheritance(selectedClass)
+        self.showAlert("Warning", "Your class \(selectedClass.name) is have more than 3 common attributes with classes [ \(matchedClasses.className)].\n Do you want to generate a common base class with name Base\(selectedClass.name)",["YES for this clas only", "YES for all classes", "NO"], .warning, completion: {index in
+            if index == 1000 {
+                PostManRequestManager.shared.createBaseClass(for: selectedClass)
+                self.feeds = PostManRequestManager.shared.classes
+                DispatchQueue.main.async {
+                    self.outlineView.reloadData()
+                }
+            }else if index == 1001 {
+                PostManRequestManager.shared.createBaseClass(for: selectedClass)
+                for mClass in matchedClasses {
+                    PostManRequestManager.shared.createBaseClass(for: mClass)
+                }
+                self.feeds = PostManRequestManager.shared.classes
+                DispatchQueue.main.async {
+                    self.outlineView.reloadData()
+                }
+            }
+        })
     }
     @objc func didTapVariableEditButtonAtIndex(button: NSButton) {
         self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "edit"), sender: button)
@@ -302,14 +345,10 @@ extension ClassesViewController: NSOutlineViewDelegate, TextEditVCDelegate {
         }
     }
     func outlineViewSelectionDidChange(_ notification: Notification) {
-        //1
         guard let outlineView = notification.object as? NSOutlineView else {
             return
         }
-        
-        //2
         let selectedIndex = outlineView.selectedRow
-        
         if let classObj = outlineView.item(atRow: selectedIndex) as? Class {
             self.currentClass = classObj
             changeTextViewText()
