@@ -264,14 +264,15 @@ extension ClassesViewController: NSOutlineViewDelegate, TextEditVCDelegate {
     
     func showAlertForBaseClassWith(_ selectedClass: Class) {
         let matchedClasses = PostManRequestManager.shared.isConformToInheritance(selectedClass)
-        self.showAlert("Warning", "Your class \(selectedClass.name) is have more than 3 common attributes with classes [ \(matchedClasses.className)].\n Do you want to generate a common base class with name Base\(selectedClass.name)",["YES for this clas only", "YES for all classes", "NO"], .warning, completion: {index in
+        self.showAlert("Warning", "Your class \(selectedClass.name) is have more than 3 common attributes with classes **[ \(matchedClasses.className)]**.\n Do you want to generate a common base class with name Base\(selectedClass.name)",["YES for all classes", "NO"], .warning, completion: {index in
+//            if index == 1000 {
+//                PostManRequestManager.shared.createBaseClass(for: selectedClass)
+//                self.feeds = PostManRequestManager.shared.classes
+//                DispatchQueue.main.async {
+//                    self.outlineView.reloadData()
+//                }
+//            }else
             if index == 1000 {
-                PostManRequestManager.shared.createBaseClass(for: selectedClass)
-                self.feeds = PostManRequestManager.shared.classes
-                DispatchQueue.main.async {
-                    self.outlineView.reloadData()
-                }
-            }else if index == 1001 {
                 PostManRequestManager.shared.createBaseClass(for: selectedClass)
                 for mClass in matchedClasses {
                     PostManRequestManager.shared.createBaseClass(for: mClass)

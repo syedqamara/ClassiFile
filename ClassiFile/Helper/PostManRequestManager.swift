@@ -167,13 +167,14 @@ class PostManRequestManager: NSObject {
             let remainingVariablesAfterBaseClassGeneration = classObj.variables.filter({ (variable) -> Bool in
                 return !baseClass.variables.haveVariable(variable)
             })
-            self.classes[index].variables = remainingVariablesAfterBaseClassGeneration
+            baseClass.isBaseClass = true
             if haveClass(baseClass).count == 0 {
                 self.classes.append(baseClass)
                 self.classes[index].parentClass = baseClass
             }else {
                 self.classes[index].parentClass = haveClass(baseClass).first
             }
+            self.classes[index].variables = remainingVariablesAfterBaseClassGeneration
         }
     }
     func getBaseClass(of classObj: Class) -> Class? {
