@@ -13,7 +13,19 @@ extension NSWindow {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WindowKeyEventFire"), object: event)
     }
 }
-
+extension String {
+    fileprivate var makeFirtCapital: String {
+        return prefix(1).uppercased() + self.lowercased().dropFirst()
+    }
+    var capitalClassName: String {
+        let names = self.components(separatedBy: "_")
+        var newArr = [String]()
+        for str in names {
+            newArr.append(str.makeFirtCapital)
+        }
+        return newArr.joined(separator: "")
+    }
+}
 extension String {
     var toDict: [String: Any]? {
         if let data = self.data(using: .utf8) {

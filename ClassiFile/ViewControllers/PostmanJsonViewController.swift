@@ -29,7 +29,7 @@ class PostmanJsonViewController: NSViewController {
         }
     }
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        if segue.identifier?._rawValue == "class" {
+        if segue.identifier?.rawValue == "class" {
             let destVC = segue.destinationController as! ClassesViewController
             destVC.feeds = PostManRequestManager.shared.classes
         }

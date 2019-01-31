@@ -46,12 +46,20 @@ extension String {
         let color = NSColor.purpleCodeColor
         return codeColorFullString(color: color)
     }
+    var redKeyWord: NSAttributedString {
+        let color = NSColor.red
+        return codeColorFullString(color: color)
+    }
     var blueKeyWord: NSAttributedString {
         let color = NSColor.blueCodeColor
         return codeColorFullString(color: color)
     }
     var userdefineWord: NSAttributedString {
         let color = NSColor.userdefineCodeColor
+        return codeColorFullString(color: color)
+    }
+    var whiteDefineWord: NSAttributedString {
+        let color = NSColor.white
         return codeColorFullString(color: color)
     }
     var commentWord: NSAttributedString {
