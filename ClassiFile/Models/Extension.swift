@@ -31,7 +31,7 @@ class Extension: File {
             if let method = allSortMethods {
                 code = code + method + kBackSlashN
             }
-            code = code + kBackSlashN
+            code = code + "}" + kBackSlashN
             return code
         }
         return nil

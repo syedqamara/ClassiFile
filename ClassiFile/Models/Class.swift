@@ -30,14 +30,14 @@ class Class: File {
     }
     override var completeClass: String? {
         if parentClass == nil {
-           parentClass = Class(with: "NSObject")
+           parentClass = Class(with: "Mappable")
         }
         //create class
         var code = """
         //This is Automatic Created Model \(name)
         
         import Foundation
-        
+        import ObjectMapper
         
         """
         code = code + "class \(name): \(parentClass!.name) {" + kBackSlashN
@@ -72,12 +72,20 @@ class Class: File {
     
     var completeInitMethodCode: String {
         var code = "///Initialize \(name) with json" + kBackSlashN
-        code = code + "public init(_ json: [String: AnyObject]){\(kBackSlashN)"
+        let initMethod = """
+        required init?(map: Map){
+        
+        }
+
+        """
+        code += initMethod
+        
+        code = code + "func mapping(map: Map) {\(kBackSlashN)"
         for variable in variables {
             code = code + variable.initMethodLineOfThisVariable
         }
-        if parentClass!.name != "NSObject" {
-            code += kBackSlashN + "super.init(json)"
+        if parentClass!.name != "Mappable" {
+            
         }
         code = code + "}" + kBackSlashN
         code.addMark(MarkType.initializer)
@@ -85,20 +93,20 @@ class Class: File {
     }
     
     var completeMappingMethod: String {
-        var code = "///Get json for you class" + kBackSlashN
-        code = code + "public var jsonMap: [String: AnyObject]{" + kBackSlashN
-        code = code + Constant.jsonCreation + kBackSlashN
-        for variable in variables {
-            code = code + variable.mapMethodLineOfThisVariable
-        }
-        code += kBackSlashN + "return json\n"
-        code = code + "}" + kBackSlashN
-        code.addMark(MarkType.jsonMapper)
-        return code
+//        var code = "///Get json for you class" + kBackSlashN
+//        code = code + "public var jsonMap: [String: AnyObject]{" + kBackSlashN
+//        code = code + Constant.jsonCreation + kBackSlashN
+//        for variable in variables {
+//            code = code + variable.mapMethodLineOfThisVariable
+//        }
+//        code += kBackSlashN + "return json\n"
+//        code = code + "}" + kBackSlashN
+//        code.addMark(MarkType.jsonMapper)
+        return ""
     }
     
     var shouldCreateExtension: Bool {
-        return (variables.haveAnySortMethodRequest || variables.haveAnyFilterFindMethodRequest)
+        return false//(variables.haveAnySortMethodRequest || variables.haveAnyFilterFindMethodRequest)
     }
     
     func addVariable(name: String, variableType: VariableType, shouldHaveSort: Bool, shouldHaveFilter: Bool) {
@@ -123,31 +131,31 @@ class Class: File {
     }
     var colorFullCompleteMappingMethod: NSMutableAttributedString {
         let mutableString = NSMutableAttributedString()
-        mutableString.append(("\n" + kBackSlashN).commentWord)
-        mutableString.append("\(kTapSpace)public var ".purpleKeyWord)
-        mutableString.append("jsonMap: ".normalWord)
-        mutableString.append(String.dictionaryName)
-        mutableString.append("{\n".normalWord)
-        mutableString.append(Constant.colorfullJsonCreation)
-        for variable in variables {
-            mutableString.append(variable.colorFullMapMethodLineOfThisVariable)
-        }
-        mutableString.append("\(kTapSpace)\(kTapSpace)return ".purpleKeyWord)
-        mutableString.append("json\n\(kTapSpace)}".normalWord)
-        mutableString.append("".addColofullMark(.jsonMapper))
+//        mutableString.append(("\n" + kBackSlashN).commentWord)
+//        mutableString.append("\(kTapSpace)public var ".purpleKeyWord)
+//        mutableString.append("jsonMap: ".normalWord)
+//        mutableString.append(String.dictionaryName)
+//        mutableString.append("{\n".normalWord)
+//        mutableString.append(Constant.colorfullJsonCreation)
+//        for variable in variables {
+//            mutableString.append(variable.colorFullMapMethodLineOfThisVariable)
+//        }
+//        mutableString.append("\(kTapSpace)\(kTapSpace)return ".purpleKeyWord)
+//        mutableString.append("json\n\(kTapSpace)}".normalWord)
+//        mutableString.append("".addColofullMark(.jsonMapper))
         return mutableString
     }
     var colorFullCompleteInitMethodCode: NSMutableAttributedString {
         let mutableString = NSMutableAttributedString()
         mutableString.append(("\n" + kBackSlashN).commentWord)
-        mutableString.append("\(kTapSpace)public init".purpleKeyWord)
-        mutableString.append("(_ json: ".normalWord)
-        mutableString.append(String.dictionaryName)
-        mutableString.append("){\n".normalWord)
+        mutableString.append("\(kTapSpace)public func".purpleKeyWord)
+        mutableString.append(" mapping(map: ".whiteDefineWord)
+        mutableString.append("Map".userdefineWord)
+        mutableString.append("){\n".whiteDefineWord)
         for variable in variables {
             mutableString.append(variable.colorfullInitMethodLineOfThisVariable)
         }
-        mutableString.append("\n\(kTapSpace)}".normalWord)
+        mutableString.append("\n\(kTapSpace)}".whiteDefineWord)
 //        mutableString.append("".addColofullMark(.initializer))
         return mutableString
     }

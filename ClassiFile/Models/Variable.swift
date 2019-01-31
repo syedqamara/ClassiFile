@@ -82,43 +82,45 @@ class Variable: NSObject {
     
     var initMethodLineOfThisVariable: String {
         var initializingLineString = ""
-        if type != .customClass {
-            if isArrayType {
-                initializingLineString = "\(name) = jsonArray"
-            }else {
-                initializingLineString = "\(name) = jsonVariable"
-            }
-           
-        }else {
-            if isArrayType {
-                initializingLineString = "for jsonObj in jsonArray {\n"
-                initializingLineString += "\(name) = \(getVariableTypeName)(jsonObj)\n}"
-            }else {
-                initializingLineString = "\(name) = \(getVariableTypeName)(jsonVariable)"
-            }
-        }
+        initializingLineString += "\(name) <- map[\"\(name)\"]\n"
         
-        var initJsonNullCheck = getVariableTypeName
-        if type == .customClass {
-            if isArrayType {
-                initJsonNullCheck = "if let jsonArray = json[\"\(keyName)\"] as? [[String: AnyObject]] {"
-            }else {
-                initJsonNullCheck = "if let jsonVariable = json[\"\(keyName)\"] as? [String: AnyObject] {"
-            }
-        }else {
-            if isArrayType {
-                initJsonNullCheck = "if let jsonArray = json[\"\(keyName)\"] as? [\(getVariableTypeName)] {"
-            }else {
-                initJsonNullCheck = "if let jsonVariable = json[\"\(keyName)\"] as? \(getVariableTypeName) {"
-            }
-        }
-        
-        let sortMethodString = """
-        \(initJsonNullCheck)
-        \(initializingLineString)
-        }\(kBackSlashN)
-        """
-        return type == .date ? "" : sortMethodString
+//        if type != .customClass {
+//            if isArrayType {
+//                initializingLineString = "\(name) = jsonArray"
+//            }else {
+//                initializingLineString = "\(name) = jsonVariable"
+//            }
+//
+//        }else {
+//            if isArrayType {
+//                initializingLineString = "for jsonObj in jsonArray {\n"
+//                initializingLineString += "\(name) = \(getVariableTypeName)(jsonObj)\n}"
+//            }else {
+//                initializingLineString = "\(name) = \(getVariableTypeName)(jsonVariable)"
+//            }
+//        }
+//
+//        var initJsonNullCheck = getVariableTypeName
+//        if type == .customClass {
+//            if isArrayType {
+//                initJsonNullCheck = "if let jsonArray = json[\"\(keyName)\"] as? [[String: AnyObject]] {"
+//            }else {
+//                initJsonNullCheck = "if let jsonVariable = json[\"\(keyName)\"] as? [String: AnyObject] {"
+//            }
+//        }else {
+//            if isArrayType {
+//                initJsonNullCheck = "if let jsonArray = json[\"\(keyName)\"] as? [\(getVariableTypeName)] {"
+//            }else {
+//                initJsonNullCheck = "if let jsonVariable = json[\"\(keyName)\"] as? \(getVariableTypeName) {"
+//            }
+//        }
+//
+//        let sortMethodString = """
+//        \(initJsonNullCheck)
+//        \(initializingLineString)
+//        }\(kBackSlashN)
+//        """
+        return initializingLineString
     }
     
     var mapMethodLineOfThisVariable: String {
@@ -217,28 +219,27 @@ class Variable: NSObject {
         return mutableString
     }
     var colorfullInitMethodLineOfThisVariable: NSMutableAttributedString {
-        let ifLet = "\(kTapSpace)\(kTapSpace)if let ".purpleKeyWord
-        let variableName = "jsonVariable = json[\"\(name)\"] ".normalWord
-        let newLine = " {\n".normalWord
-        let variableAssignment = "\(kTapSpace)\(kTapSpace)\(kTapSpace)\(name) = jsonVariable\n\(kTapSpace)\(kTapSpace)}\n".normalWord
+        
+        let green = ("\(kTapSpace)" + name).userdefineWord
+        let white = "<- map[".whiteDefineWord
+        let red = "\"\(name)\"".redKeyWord
+        let whiteLast = "]".whiteDefineWord
+        
         
         let mutableString = NSMutableAttributedString()
-        mutableString.append(ifLet)
-        mutableString.append(variableName)
-        mutableString.append("as? ".purpleKeyWord)
-        mutableString.append(getAttributedVariableTypeName)
-        mutableString.append(newLine)
-        mutableString.append(variableAssignment)
-        
+        mutableString.append(green)
+        mutableString.append(white)
+        mutableString.append(red)
+        mutableString.append(whiteLast)
         return mutableString
     }
     var colorFullMapMethodLineOfThisVariable: NSMutableAttributedString {
-        let jsonAssignment = "\(kTapSpace)\(kTapSpace)json[\(name)] = \(name) ".normalWord
-        let anyObject = "as AnyObject\n".purpleKeyWord
+//        let jsonAssignment = "\(kTapSpace)\(kTapSpace)json[\(name)] = \(name) ".normalWord
+//        let anyObject = "as AnyObject\n".purpleKeyWord
         
         let mutableString = NSMutableAttributedString()
-        mutableString.append(jsonAssignment)
-        mutableString.append(anyObject)
+//        mutableString.append(jsonAssignment)
+//        mutableString.append(anyObject)
         
         return mutableString
     }
