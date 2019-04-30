@@ -52,7 +52,9 @@ There are few models we have defined to draw dynamic code.
     * **2**: `variables` is an Array of type `Variable` this array contains all entered variables.
             to add a variable in class you can use below method.
             
-    `classObj.addVariable(name: "id", variableType: .string, shouldHaveSort: true, shouldHaveFilter: false)`
+    ``` swift
+    classObj.addVariable(name: "id", variableType: .string, shouldHaveSort: true, shouldHaveFilter: false)
+    ```
     
 * **B**: `Variable` is model to store information about a single variable. `Variable` contains some attributes use for special purpose.
     * **1**: `name` store the name of a variable.
@@ -74,7 +76,7 @@ There are few models we have defined to draw dynamic code.
 
 ## Enumerations
 Enumerations that we use in this projects are following.
-```
+``` swift
 enum CodeSecurity: String {
 case publicVar = "public"
 case internalVar = "internal"
