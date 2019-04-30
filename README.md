@@ -78,21 +78,21 @@ There are few models we have defined to draw dynamic code.
 Enumerations that we use in this projects are following.
 ``` swift
 enum CodeSecurity: String {
-case publicVar = "public"
-case internalVar = "internal"
-case openVar = "open"
-case privateVar = "private"
-case filePrivateVar = "filePrivate"
+    case publicVar = "public"
+    case internalVar = "internal"
+    case openVar = "open"
+    case privateVar = "private"
+    case filePrivateVar = "filePrivate"
 }
 
 enum VariableType: String {
-case int = "Int"
-case string = "String"
-case float = "Float"
-case double = "Double"
-case bool = "Bool"
-case date = "Date"
-case void = "Void"
+    case int = "Int"
+    case string = "String"
+    case float = "Float"
+    case double = "Double"
+    case bool = "Bool"
+    case date = "Date"
+    case void = "Void"
 }
 ```
 
@@ -103,7 +103,7 @@ case void = "Void"
 
 
 Currently this project only focus to create only **Swift** classes.
-We are contributing to make development more riliable and fast.
+We are contributing to make development more reliable and fast.
 **Your help will be appriciated and warmly welcome.**
 
 # Contributors
